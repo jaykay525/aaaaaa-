@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>{$web_title}</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+    <link rel="stylesheet" href="../public/css/ukl_style.css?t={$no_cache_sign}">
+    <link rel="stylesheet" href="__PUBLIC__/js/bootstrap/css/bootstrap.css">
+
+</head>
+<body>
+<div  class="bBox" style=" ">
+
+    <img src="../public/images/logo.png?t={$no_cache_sign}" alt="" style="">
+
+    <div class="font" style="">
+        <span style="">Blockchain project ratings</span>
+        <span style=""> from top investors and experts <br><span class="chinese" style="display:none;bottom: -25px;left: 0;font-size: 15px !important;">您身边的区块链项目评级专家</span></span>
+    </div>
+
+
+
+    <div class="box" style="">
+
+        <div class="andriod" style="">
+            <img src="../public/images/andriod.png?t={$no_cache_sign}" alt="" style="">
+            <span style="">Andriod</span>
+
+            <!--安卓二维码-->
+            <img class="img1" src="../public/images/download.png?t={$no_cache_sign}" alt="" style="">
+        </div>
+
+        <div class="ios" style="">
+            <img src="../public/images/ios.png?t={$no_cache_sign}" alt="" style="">
+            <span style="">IOS</span>
+            <!--苹果二维码-->
+            <img class="img2" src="../public/images/download.png?t={$no_cache_sign}" alt="" style="">
+        </div>
+
+
+    </div>
+
+    <!--h5显示二维码-->
+    <div class="mobile_qrCode" style="text-align: center;">
+        <button style="">Download now</button>
+        <span class="now_download" style="color: white;position: absolute;bottom: -70px;font-size: 15px;margin-left: -35px;">立即下载</span>
+        <span class="tit" style="width: 300px;display: none;color: #1abc9c; position: absolute;bottom: -70px;left: 50%;margin-left: -150px;">正在安装，请按 Home 键在桌面查看</span>
+    </div>
+
+    {eq name="current_plat" value="ios"}
+    <!--只在iOS端显示---->
+    <span class="btn btn-lg describe" data-toggle="modal"data-target="#inhouseTip" style="width:100%;position: absolute;bottom: 1%;;font-size: 15px;text-align: center;color: #1abc9c;display: none">
+            "未受信任的企业级开发者"的解决办法
+    </span>
+    {/eq}
+
+    <div id="mask" class="hide"></div>
+    <div id="weixinTip" class="weixinTip hide"></div>
+</div>
+
+<div class="bottom" style="">
+    <div class="" style="">
+        <div class="left" style="">
+            <span style="">Contact us</span>
+            <img class="weixin" src="../public/images/weixin.png?t={$no_cache_sign}" alt="" style="">
+            <img class="fenxiang" src="../public/images/fenxiang.png?t={$no_cache_sign}" alt="" style="">
+            <!--微信二维码-->
+            <img  class="img3" src="../public/images/weixin.jpg?t={$no_cache_sign}" alt="" style="">
+            <!--分享二维码-->
+            <img class="img4" src="../public/images/fenxiang.jpg?t={$no_cache_sign}" alt="" style="">
+        </div>
+
+        <ul class="message" style="">
+            <li style="">Wechat：BBIN888A</li>
+            <li style="">Telegram Group：<a href="https://t.me/uklio">https://t.me/uklio</a></li>
+            <li style="">Email：ico-rating@ukl.io</li>
+            <li style="">Telegram Office Acout：<a href="https://t.me/ico_rating_ukl">https://t.me/ico_rating_ukl</a></li>
+        </ul>
+    </div>
+    <span style="">Copyright &copy; 2018 UKL All rights reserved</span>
+</div>
+
+
+<!--模态框-->
+<div class="modal fade addmodel in" id="inhouseTip" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title font-16">"未受信任的企业级开发者"的解决办法</h4>
+            </div>
+            <div class="modal-body" style="background:#f2f2f2;height:600px;overflow-y: scroll;">
+                <section>
+                    <div style="padding:0 20px 20px;color:#333;">
+                        <p>因苹果公司的政策原因，在iOS系统中首次安装企业版应用时会出现"未受信任的企业级开发者"提示</p>
+                    </div>
+                    <div style="padding:0 10px 20px;">
+                        <img class="img-responsive center-block mt-20 mb-20" src="https://static.pgyer.com/static-20180514/images/resovelFlow1_cn.png" style="width:80%;">
+                        <br>
+                        <h4 class="font-16">解决办法如下（以iOS11系统为例）：</h4>
+                        <li style="list-style:none;color:#333;">1、在手机中打开设置功能，选择"通用"</li>
+                        <img class="img-responsive center-block mt-20 mb-20" src="https://static.pgyer.com/static-20180514/images/resovelFlow2_cn.png" style="width:80%;">
+                        <li style="list-style:none;color:#333;">2、在通用中，选择"描述文件与设备管理"功能</li>
+                        <img class="img-responsive center-block mt-20 mb-20" src="https://static.pgyer.com/static-20180514/images/resovelFlow3_cn.png" style="width:80%;">
+                        <li style="list-style:none;color:#333;">3、在描述文件与设备管理中的企业级应用分类中，选择要安装的企业应用的文件名称（与打开时的提示一致），点击进入</li>
+                        <img class="img-responsive center-block mt-20 mb-20" src="https://static.pgyer.com/static-20180514/images/resovelFlow4_cn.png" style="width:80%;">
+                        <li style="list-style:none;color:#333;">4、进入企业签名页面后，确认企业签名中的公司名称与应用名称后，点击信任"企业签名公司名称"</li>
+                        <img class="img-responsive center-block mt-20 mb-20" src="https://static.pgyer.com/static-20180514/images/resovelFlow5_cn.png" style="width:80%;">
+                        <img class="img-responsive center-block mt-20 mb-20" src="https://static.pgyer.com/static-20180514/images/resovelFlow6_cn.png" style="width:80%;">
+                        <li style="list-style:none;color:#333;">5、回到桌面，重新打开应用即可使用</li>
+                        <br>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer" style="margin-top:0px">
+                <a data-dismiss="modal" href="javascript:void(0)" class="btn btn-u btn-u btn-u-default" id="cancle">关闭</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+<script src="__PUBLIC__js/jquery-3.3.1.min.js?t={$no_cache_sign}"></script>
+<script src="__PUBLIC__/js/bootstrap/js/bootstrap.js"></script>
+<script>
+
+
+    $('.andriod').hover(function () {
+
+        var wait=setInterval(function(){
+            if(!$(".img1").is(":animated")){
+                $('.img1').addClass("rotate");
+                $('.img1').show();
+                clearInterval(wait)
+            }
+        },100);
+
+    },function () {
+        $('.img1').addClass("rotate1");
+        setTimeout(function () {
+            $('.img1').hide();
+            $('.img1').removeClass('rotate');
+            $('.img1').removeClass('rotate1')
+        },500)
+    });
+
+
+    $('.ios').hover(function () {
+        var wait=setInterval(function(){
+            if(!$(".img2").is(":animated")){
+                $('.img2').addClass("rotate");
+                $('.img2').show();
+                clearInterval(wait)
+            }
+        },100);
+    },function () {
+        $('.img2').addClass("rotate1");
+        setTimeout(function () {
+            $('.img2').hide();
+            $('.img2').removeClass('rotate');
+            $('.img2').removeClass('rotate1')
+        },500)
+    })
+
+
+
+
+    $('.weixin').hover(function () {
+        $('.img3').show()
+    },function () {
+        $('.img3').hide()
+    })
+
+
+    $('.fenxiang').hover(function () {
+        $('.img4').show()
+    },function () {
+        $('.img4').hide()
+    })
+
+    /*判断是苹果还是安卓手机*/
+    $(function(){
+        $(".android").hide();
+        $(".ios").hide();
+        $(".ios").hide();
+
+        var is_ios     = /(iPhone|iPad|iPod)/ig.test(navigator.userAgent);
+        console.log(is_ios);
+        var is_android = /(android)/ig.test(navigator.userAgent);
+        console.log(is_android);
+        var is_weixin  = /(micromessenger)/ig.test(navigator.userAgent);
+        console.log(is_weixin);
+
+        $('.ios').show();
+        $('.android').show();
+
+        var tip_class= is_android ? 'android_tip' : 'ios_tip';
+        console.log(tip_class);
+
+        $(".mobile_qrCode button").click(function(){
+
+
+            if(is_ios) {
+                $('.mobile_qrCode button').css('display', 'none');
+                $('.now_download').css('display', 'none');
+            }
+
+            if(is_weixin){
+                $('#mask').removeClass('hide');
+                $('#weixinTip').removeClass('hide').addClass(tip_class);
+                $('#weixinTip').height($(window).height());
+
+                //点击背景，隐藏tips
+                $("#mask,#weixinTip").click(function(){
+                    $('#mask').addClass('hide');
+                    $('#weixinTip').addClass('hide');
+                });
+                return false;
+            }
+
+            if (is_android) {
+
+                window.location.href='{$android}';
+
+            }else{
+
+                window.location.href='{$ios}';
+                setTimeout(function () {
+                    $('.mobile_qrCode .tit').css('display','block');
+                },3000)
+                
+            }
+
+            return false;
+        });
+
+    });
+</script>
+</html>
+

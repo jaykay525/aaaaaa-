@@ -1,0 +1,45 @@
+{include file="public/header" /}
+
+<ul class="tab-label">
+	<li class="jump" url="{:url('index', array('module' => $module))}">{$_cur_title}</li>
+	<li class="on" url="{:url('recycle', array('module' => $module))}">回收站</li>
+</ul>
+<table class="data-list">
+	<tbody>
+		<tr>
+			<th width="40"><input type="checkbox" onclick="$.checkbox(this,'.select-box')"></th>
+			<th width="80">编号</th>
+			<th>标题</th>
+			<th>删除时间</th>
+			<th width="120">操作</th>
+		</tr>
+		{volist name="list" id="rs"}
+			<tr class="data-{$rs[$pk_key]}">
+				<td class="select-box">
+					<input type="checkbox" name="ids[]" value="{$rs[$pk_key]}">
+				</td>
+				<td>{$rs[$pk_key]}</td>
+				<td>{$rs[$_recycle_field]}</td>
+				<td>{:date('Y-m-d H:i:s', $rs['recycle_time'])}</td>
+				<td>
+					<a class="btn btn-default confirm-opt" href="{:url('permit', array('module' => $module, $pk_key => $rs[$pk_key]))}" title="还原" del-class="data-{$rs[$pk_key]}">
+						<i class="icon-restore"></i>
+					</a>
+					<a class="btn btn-default confirm-opt" href="{:url('delete', array('module' => $module, $pk_key => $rs[$pk_key]))}" title="删除" msg="您确认要删除此记录？" del-class="data-{$rs[$pk_key]}">
+						<i class="icon-delete"></i>
+					</a>
+				</td>
+			</tr>
+		{/volist}
+	</tbody>
+</table>
+
+<div class="opt-page-box">
+	<ul class="button-group">
+		<li class="btn bg-default batch-opt delete-opt" url="{:url('delete', array('module' => $module))}"><i class="icon-delete"></i>删除</li>
+		<li class="btn bg-default batch-opt restore-opt" url="{:url('permit', array('module' => $module))}"><i class="icon-restore"></i>还原</li>
+	</ul>
+	{$page}
+</div>
+
+{include file="public/footer" /}

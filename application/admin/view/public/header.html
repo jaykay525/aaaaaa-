@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{$_title}-后台管理系统{$web_title ? ('-' . $web_title) : ''}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
+<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+
+<meta name="renderer" content="webkit">
+
+<link rel="stylesheet" type="text/css" href="../public/css/style.css" />
+
+<script type="text/javascript" src="__PUBLIC__js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__js/jquery-plugin/jquery.md5.js"></script>
+<script type="text/javascript" src="../public/js/common.js"></script>
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__js/jquery-ui/jquery-ui.min.css" />
+<script type="text/javascript" src="__PUBLIC__js/jquery-ui/jquery-ui.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__js/bootstrap/css/styles.css">
+<script type="text/javascript" src="__PUBLIC__js/bootstrap/js/moment.js"></script>
+<script type="text/javascript" src="__PUBLIC__js/bootstrap/js/bootstrap-datetimepicker.js"></script>
+
+</head>
+<body>
+<script type="text/javascript">
+$(document).ready(function () {
+	// 处理左侧栏目显示隐藏
+	$('.switch-channel').click(function () {
+		var width = $('.sidebar').width();
+		if($(this).hasClass('on')){
+			$(this).removeClass('on');
+			$(this).find('i').removeClass('icon-channel').addClass('icon-channel-on');
+			$(".sidebar").animate({ 
+				left: '-' + width + "px"
+			}, 500 );
+			$(".main-content").animate({ 
+				left: 0
+			}, 500 );
+			// $(".topbar").animate({ 
+			// 	'margin-left': 0
+			// }, 500 );
+		}else{
+			$(this).addClass('on');
+			$(this).find('i').removeClass('icon-channel-on').addClass('icon-channel');
+			$(".sidebar").animate({ 
+				left: 0
+			}, 500 );
+			$(".main-content").animate({ 
+				left: width + "px"
+			}, 500 );
+			// $(".topbar").animate({ 
+			// 	'margin-left': width + "px"
+			// }, 500 );
+		}
+	});
+	$('.menu-list .sub').click(function () {
+		$(this).parent().find('ul').slideUp();
+		$('.menu-list .sub i').removeClass('icon-arrow-down').addClass('icon-arrow-right');
+
+		if($(this).nextUntil('.sub', 'ul').hasClass('on')){
+			$(this).parent().find('ul').removeClass('on');
+			$(this).find('i').removeClass('icon-arrow-down').addClass('icon-arrow-right');
+			$(this).nextUntil('.sub', 'ul').slideUp().removeClass('on');
+		}else{
+			$(this).parent().find('ul').removeClass('on');
+			$(this).find('i').removeClass('icon-arrow-right').addClass('icon-arrow-down');
+			$(this).nextUntil('.sub', 'ul').slideDown().addClass('on');
+		}
+	})
+	init_sidebar();
+	$(window).resize(function () {
+		init_sidebar();
+	});
+	function init_sidebar () {
+		var width = $(this).width();
+		if(width <= 768){
+			$('.switch-channel').removeClass('on');
+			$('.switch-channel i').removeClass('icon-channel').addClass('icon-channel-on');
+			$(".sidebar").css('left', '-200px');
+		}else{
+			$('.switch-channel').addClass('on');
+			$('.switch-channel i').removeClass('icon-channel-on').addClass('icon-channel');
+			$(".sidebar").css('left', '0px');
+		}
+	}
+});
+</script>
+<div class="topbar">
+	<ul class="topbar-left">
+		<li>
+			<a class="switch-channel on"><i class="icon-channel"></i></a>
+		</li>
+	</ul>
+	<div class="topbar-title">后台管理系统</div>
+	<ul class="topbar-right">
+		<li class="drop-down">
+			<a href="">{$_realname}<i class="icon-arrow-down-solid"></i></a>
+			<ul>
+				<li class="jump" url="{:url('Admin/change_password')}">修改密码</li>
+				<li class="jump" url="{:url('Admin/logout', array('is_redirect' => 1))}">退出登录</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div class="sidebar">
+	<div class="icon-menu">
+		<ul>
+			{volist name="_top_menu_list" id="rs"}
+				{neq name="rs.show" value="no"}
+					<li class="{$rs['is_select'] ? 'on' : ''}"><a href="{:url($rs['url'])}"><i class="{$rs['icon']}"></i><span>{$rs['title']}</span></a></li>
+				{/neq}
+			{/volist}
+		</ul>
+	</div>
+	<ul class="menu-list">
+		{volist name="_left_menu_list" id="rs"}
+			<li class="sub">{$rs['title']}<i class="icon-arrow-{$rs['is_select'] ? 'down' : 'right'}"></i></li>
+			<ul class="{$rs['is_select'] ? 'on' : ''}" style="{$rs['is_select'] ? 'display: block' : ''}">
+				{volist name="rs.list" id="row"}
+					<li class="{$row['is_select'] ? 'on' : ''}"><a href="{:url($row['url'])}">{$row['title']}</a></li>
+				{/volist}
+			</ul>
+		{/volist}
+	</ul>
+</div>
+<div class="main-content">
+	{include file="public/navigation" /}

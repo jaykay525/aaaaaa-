@@ -1,0 +1,81 @@
+{include file="public/header" /}
+<form method="get" action="{:url('index')}" novalidate="true">
+	<section class="panel panel-default search-from">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>查询条件</div>
+		</header>
+		<div class="panel-body">
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="user_id" value="{$param[user_id]}" placeholder="用户ID">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="nick_name" value="{$param[nick_name]}" placeholder="用户名">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<select name="device">
+						<option value="">全部来源</option>
+						<option value="ios" <?php if($param[device]=='ios')echo 'selected'; ?>>IOS</option>
+						<option value="android" <?php if($param[device]=='android')echo 'selected'; ?>>Android</option>
+						<option value="h5" <?php if($param[device]=='H5')echo 'selected'; ?>>H5</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<select name="account_state">
+						<option value="">账号状态</option>
+						<option value="1" <?php if($param[account_state]=='1')echo 'selected'; ?>>启用</option>
+						<option value="2" <?php if($param[account_state]=='2')echo 'selected'; ?>>禁用</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group-submit">
+				<button type="submit" class="btn btn-info"><i class="icon-search"></i>查询</button>
+			</div>
+		</div>
+	</section>
+</form>
+<table class="data-list">
+	<tbody>
+		<tr>
+			<th>#</th>
+			<th width="70">用户UID</th>
+			<th>呢称</th>
+			<th>来源</th>
+			<th>发出红包金额</th>
+			<th>发出红包数</th>
+			<th>钱包余额</th>
+			<th>粉丝数</th>
+			<th>账号状态</th>
+			<th>注册时间</th>
+		</tr>
+		{volist name="list" id="rs" key="k"}
+			<tr class="data-{$rs['id']}">
+				<td>{$k}</td>
+				<td>{$rs['uid']}</td>
+				<td>{$rs['nick_name']}</td>
+				<td>{$rs['device']==1? 'Android' : ($info['device']==2? 'IOS':'H5')}</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>0</td>
+				<td>{$rs['account_state']==1? '启用' : '禁用'}</td>
+				<td>{:date('Y-m-d H:i:s', $rs['create_time'])}</td>
+			</tr>
+		{/volist}
+	</tbody>
+</table>
+
+<div class="opt-page-box">
+	<ul class="button-group">
+		<li class="btn bg-default jump" url="{:url('add')}"><i class="icon-plus"></i>添加</li>
+	</ul>
+	{$page}
+</div>
+
+{include file="public/footer" /}

@@ -1,0 +1,35 @@
+{include file="public/header" /}
+
+<table class="data-list">
+	<tbody>
+		<tr>
+			<th width="70">角色ID</th>
+			<th>名称</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+		{volist name="list" id="rs"}
+			<tr class="data-{$rs['role_id']}">
+				<td>{$rs['role_id']}</td>
+				<td>{$rs['title']}</td>
+				<td>
+					<span class="label label-{$rs.status_color_class}">{$rs.status_desc}</span>
+				</td>
+				<td>
+					<a class="btn btn-default" title="修改" href="{:url('edit', array('role_id' => $rs['role_id']))}">
+						<i class="icon-edit"></i>
+					</a>
+				</td>
+			</tr>
+		{/volist}
+	</tbody>
+</table>
+
+<div class="opt-page-box">
+	<ul class="button-group">
+		<li class="btn bg-default jump" url="{:url('add')}"><i class="icon-plus"></i>添加</li>
+	</ul>
+	{$page}
+</div>
+
+{include file="public/footer" /}

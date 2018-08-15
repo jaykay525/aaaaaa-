@@ -1,0 +1,91 @@
+{include file="public/header" /}
+
+<form class="ajax-form">
+	<section class="panel panel-default">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>{$_cur_title}</div>
+			<div class="opt-box" style="float: right">
+				<a href="" class="jump"><i class="icon-back"></i>返回</a>
+			</div>
+		</header>
+		<div class="panel-body">
+			<div class="form-group">
+				<div class="name">名称</div>
+				<div class="input">
+					<input type="text" name="title" value="{$info['title']}" class="form-control" placeholder="角色不能为空！" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="name">选择可操作权限</div>
+				<div class="input">
+					<span style="color:#0000FF;cursor:pointer;" onclick="$.checkbox(this,'div',true)">全选</span> /
+					<span style="color:#0000FF;cursor:pointer;" onclick="$.checkbox(this,'div',false)">反选</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="row">
+		{php}
+			$menu_info = config('menu.menu');
+			$_auths    = unserialize($info['auths']);
+		{/php}
+		{volist name="menu_info" id="row" key="b"}
+			{php} $module    = $key;{/php}
+			{php} $cur_auths = $_auths[$module];{/php}
+			<div class="col-12">
+				<section class="panel panel-default">
+					<header class="panel-header">
+						<div class="title"><i class="icon-arrow-down-solid"></i>{$row['title']}</div>
+					</header>
+					{volist name="row.list" id="vo" key="k"}
+						<div class="panel-body">
+							<div class="form-group">
+								<div class="name">
+									<label>
+										<input type="checkbox" class="checkbox" onclick="$.checkbox(this,'#role-{$b}{$k}');">
+										{$vo['title']}
+									</label>
+								</div>
+								<div class="input" id="role-{$b}{$k}">
+									{volist name="vo['list']" id="ks" key="o"}
+										<label>
+											{php}$is_checked = in_array($ks['url'], $cur_auths);{/php}
+											<input type="checkbox" class="checkbox" name="auths[{$module}][]" onclick="$.checkbox(this,'#role-opt-{$b}-{$k}-{$o}');" {$is_checked ? 'checked' : ''} value="{$ks['url']}">
+											{$ks['title']}
+										</label>
+										{php}
+											if($ks['filter_list']){
+												echo '<span id="role-opt-' . $b . '-' . $k . '-'  . $o . '">(';
+											}
+											foreach($ks['filter_list'] as $ots){
+										{/php}
+										<label>
+											{php} $is_checked = in_array($ots['url'],$cur_auths);{/php}
+											<input type="checkbox" class="checkbox" name="auths[{$module}][]" {$is_checked ? 'checked' : ''} value="{$ots['url']}">
+											{$ots['title']}
+										</label>
+										{php}
+											}
+											if($ks['filter_list']){
+												echo ')</span>';
+											}
+										{/php}
+										<br>
+									{/volist}
+								</div>
+							</div>
+						</div>
+					{/volist}
+				</section>
+			</div>
+		{/volist}
+	</div>
+	
+	<div class="form-group-submit fixed">
+		<button type="submit" class="btn btn-sm bg-info"><i class="icon-save"></i>保存</button>
+		<button type="button" class="btn btn-sm bg-cancel jump"><i class="icon-back"></i>返回</button>
+		<div class="fixed-cover"></div>
+	</div>
+</form>
+{include file="public/footer" /}

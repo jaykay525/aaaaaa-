@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$info.title}</title>
+    <link rel="stylesheet" href="../public/css/details.css?{:date('ymdHis')}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <style> body,p{color: #727171; font-family: Droidsansfallback,'Droid Sans','Heiti SC',Helvetica,HelveticaNeue; font-size: 14px;line-height: 2;} img{ text-align: center; max-width: 100% !important; } </style>
+</head>
+<body>
+<div class="project">
+    <!--图片-->
+    <img class="picture" src="{$info.cover_path}" alt=""  width="100%">
+    <!--评级-->
+    <div class="rating" style="background: url('../public/images/news/rating.png') no-repeat;">
+        <span style="">{$info['grade']}</span>
+    </div>
+    <!--链接跳转-->
+    <ul class="jump">
+        {$info.label}
+    </ul>
+
+    <!--tab切换-->
+    <ul class="tab_switch" >
+        <li id="introduce" class="active">项目介绍</li>
+        <li id="information">众筹信息</li>
+        <li id="team">项目团队</li>
+        <li id="join">补充说明</li>
+    </ul>
+
+    <!--内容-->
+    <div class="project-content" id="project">
+            <span id="div1" >项目介绍</span>
+            <div class="div1-detail">
+                {$info.introduction}
+            </div>
+        <ul>
+            <li>
+                <p>项目官网</p>
+                <p><a
+                        {if condition="substr($info['web_address'],0,4) eq 'http'"}
+                        href="{$info.web_address}"
+                        {else/}
+                    href="http://{$info.web_address}"
+                    {/if}
+                    >{$info.web_address}</a></p>
+            </li>
+            <li>
+                <p>白皮书</p>
+                <p><a
+                        {if condition="substr($info['white_paper'],0,4) eq 'http'"}
+                        href="{$info.white_paper}"
+                        {else/}
+                    href="http://{$info.white_paper}"
+                    {/if}
+                    >{$info.white_paper}</a></p>
+            </li>
+        </ul>
+
+
+
+            <span id="div2" >众筹信息</span>
+            <ul>
+                <li>
+                    <p>开始时间</p>
+                    <p>{$info.purchase_start_time|date="Y-m-d",###}</p>
+                </li>
+                <li>
+                    <p>结束时间</p>
+                    <p>{$info.purchase_end_time|date="Y-m-d",###}</p>
+                </li>
+                <li>
+                    <p>代币名称</p>
+                    <p>{$info.token_name}</p>
+                </li>
+                <li>
+                    <p>代币价格</p>
+                    <p>{$info.token_price}</p>
+                </li>
+                <li>
+                    <p>接受币种</p>
+                    <p>{$info.accept_token}</p>
+                </li>
+                <li>
+                    <p>项目硬顶</p>
+                    <p>{$info.project_hard_top}</p>
+                </li>
+                <li>
+                    <p>项目软顶</p>
+                    <p>{$info.project_soft_item}</p>
+                </li>
+            </ul>
+
+                <ul>
+                    <li>
+                        <p>代币总量</p>
+                        <p>{$info.all_token}</p>
+                    </li>
+                    <li>
+                        <p>众筹代币总量</p>
+                        <p>{$info.into_token}</p>
+                    </li>
+                    <li>
+                        <p>私募详情</p>
+                        <p>{$info.private_placement_info}</p>
+                    </li>
+                    <li>
+                        <p>公募详情</p>
+                        <p>{$info.public_placement_info}</p>
+                    </li>
+                    <li>
+                        <p>不能参与国家</p>
+                        <p>{$info.unjoin_country}</p>
+                    </li>
+                    <li>
+                        <p>是否白名单/KYC</p>
+                        <p>
+                            {eq name="info.is_need_whitelist" value="1"}
+                                是
+                            {else/}
+                                否
+                            {/eq}
+                        </p>
+                    </li>
+
+                    <li>
+                        <p>上交易所时间</p>
+                        <p>{$info.exchange_time}</p>
+                    </li>
+                    <li>
+                        <p>项目备注</p>
+                        <p>{$info.notes}</p>
+                    </li>
+                </ul>
+                <span id="div4" >项目团队</span>
+                <ul >
+                    <li>
+                        <p>
+                            {$info.project_team}
+                        </p>
+                    </li>
+                </ul>
+                <span id="div5" >补充说明</span>
+                <ul >
+
+                    <li>
+                        <p>发币时间</p>
+                        <p>{$info.token_start_time}</p>
+                    </li>
+                    <li>
+                        <p>锁仓规则</p>
+                        <p>{$info.suocang_rules}</p>
+                    </li>
+
+                    <li>
+                        <p>备注详情</p>
+                        <p>{$info.purchase_notes}</p>
+                    </li>
+                    <li>
+                        <p>微信客服</p>
+                        <p>
+                            <img src="{$info.wechat_head}" alt="" style="width: 30px;height: 30px;display: inline-block;vertical-align:middle;margin-right: 5px;">
+                            {$info.wechat_customer}</p>
+                    </li>
+                </ul>
+            <!--跳转按钮-->
+
+            <img src="../public/images/news/u1943.png" alt="" class="open-obj">
+
+
+        <div class="link-invite" style="z-index: 99999"></div>
+        <div class="phone" style="z-index: 99999"></div>
+    </div>
+
+    <div style="position: relative;bottom: 90px;">
+        <button id="btn" class="pro-read" >打开UKL.IO ,阅读体验更佳</button>
+    </div>
+
+</div>
+</body>
+<script src="__PUBLIC__js/jquery-1.12.4.min.js"></script>
+<script>
+
+    /*切换tab样式*/
+    $('.tab_switch li').click(function () {
+        $(this).addClass('active').siblings().removeClass('active')
+    });
+
+    /*点击tab滚动到对应的内容*/
+    $(document).ready(function() {
+        $("#introduce").click(function() {
+            var top =$("#div1").offset().top-50;
+            console.log(top);
+            $("html, body").animate({
+                scrollTop: top}, {duration: 500,easing: "swing"});
+            return false;
+        });
+        $("#information").click(function() {
+            var top =$("#div2").offset().top-50;
+            console.log(top);
+            $("html, body").animate({
+                scrollTop:top }, {duration: 500,easing: "swing"});
+            return false;
+        });
+        $("#details").click(function() {
+            var display = $('.hide-show').css('display');
+            if (display== "none"){
+                var top =$("#div2").offset().top+250;
+                $("html, body").animate({
+                    scrollTop: top }, {duration: 500,easing: "swing"});
+            } else {
+                var top =$("#div3").offset().top -50;
+                $("html, body").animate({
+                    scrollTop: top }, {duration: 500,easing: "swing"});
+                return false;
+            }
+        });
+        $("#team").click(function() {
+            var display = $('.hide-show').css('display');
+            if (display== "none"){
+                var top =$("#div2").offset().top+350;
+                $("html, body").animate({
+                    scrollTop: top }, {duration: 500,easing: "swing"});
+            } else {
+                var top =$("#div4").offset().top -50;
+                $("html, body").animate({
+                    scrollTop: top }, {duration: 500,easing: "swing"});
+                return false;
+            }
+        })
+        $("#join").click(function() {
+            var display = $('.hide-show').css('display');
+            if (display== "none"){
+                var top =$("#div2").offset().top+350;
+                $("html, body").animate({
+                    scrollTop: top }, {duration: 500,easing: "swing"});
+            } else {
+                var top =$("#div5").offset().top -50;
+                $("html, body").animate({
+                    scrollTop: top }, {duration: 500,easing: "swing"});
+                return false;
+            }
+        })
+    });
+
+    /*点击动画按钮展示所有数据*/
+    $('.open-obj').click(function () {
+        $(this).css('display','none');
+        $('.pro-read').css('display','none');
+        $('.project-content').css({'height':'auto','margin-bottom':0})
+    });
+
+    /*判断滚动距离让tab_switch标签固定*/
+    var navH = $(".tab_switch").offset().top;
+    console.log(navH);
+    $(window).scroll(function () {
+        var scroH = $(this).scrollTop();
+        if(scroH-51>=navH){
+            $(".tab_switch").css({"position":"fixed","top":"0"});
+            $(".tab_switch").css('background-color','white');
+            $('.project-content').css('margin-top','50px')
+        }else {
+            $(".tab_switch").css({"position":"static"});
+            $(".tab_switch").css('background-color','transparent');
+            $('.project-content').css('margin-top','0');
+        }
+    });
+
+    /***
+     * is_ios、is_android、is_weixin分别判断是ios还是Android还是wechat
+     * #btn,.link-invite点击之后跳转到App对应的页面，没有安装App跳转到邀请页面
+     */
+
+    var is_ios     = /(iPhone|iPad|iPod)/ig.test(navigator.userAgent);
+
+    var is_android = /(android)/ig.test(navigator.userAgent);
+
+    var is_weixin  = /(micromessenger)/ig.test(navigator.userAgent);
+
+    $('#btn,.link-invite').click(function (e) {
+        if (is_weixin) {
+            window.location.href='{$invite_url}'
+        }else if (!is_weixin&&is_android) {
+            //  Android打开项目详情 &28拼接的参数
+            window.location.href='ukl://projectdetail?id={$info.project_id}';
+        }else if (!is_weixin&&is_ios){
+            //  IOS打开项目详情 &28拼接的参数
+            window.location.href='uklioapp://?parame=1&{$info.project_id}';
+        }
+        window.setTimeout(function(){
+            window.location.href='{$invite_url}'
+        },4000)
+    });
+
+</script>
+</html>

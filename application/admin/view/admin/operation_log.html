@@ -1,0 +1,74 @@
+{include file="public/header" /}
+
+<form method="get" action="{:url('operation_log')}" novalidate="true">
+	<section class="panel panel-default search-from">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>查询条件</div>
+		</header>
+		<div class="panel-body">
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="admin_id" value="{$admin_id}" placeholder="管理员ID">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="realname" value="{$realname}" placeholder="姓名">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="module" value="{$module}" placeholder="操作模块">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="action" value="{$action}" placeholder="操作方法">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="ip" value="{$ip}" placeholder="访问IP地址">
+				</div>
+			</div>
+			<div class="form-group-submit">
+				<button type="submit" class="btn btn-info"><i class="icon-search"></i>查询</button>
+			</div>
+		</div>
+	</section>
+</form>
+
+<table class="data-list">
+	<tbody>
+		<tr>
+			<th width="70">管理员ID</th>
+			<th>管理员</th>
+			<th>操作类型</th>
+			<th>操作名称</th>
+			<th>操作模块</th>
+			<th>操作方法</th>
+			<th>GET参数</th>
+			<th>操作IP</th>
+			<th>请求时间</th>
+		</tr>
+		{volist name="list" id="rs"}
+			<tr class="data-{$rs['logs_id']}">
+				<td>{$rs['admin_id']}</td>
+				<td>{$rs['realname']}</td>
+				<td>{$rs['request_type']}</td>
+				<td>{$rs['opt_name']}</td>
+				<td>{$rs['module']}</td>
+				<td>{$rs['action']}</td>
+				<td>{$rs['params']}</td>
+				<td>{$rs['ip']}</td>
+				<td>{:date('Y-m-d H:i:s', $rs['create_time'])}</td>
+			</tr>
+		{/volist}
+	</tbody>
+</table>
+
+<div class="opt-page-box">
+	{$page}
+</div>
+
+{include file="public/footer" /}

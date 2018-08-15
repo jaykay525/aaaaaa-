@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$web_title}</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0,viewport-fit=cover">
+    <link rel="stylesheet" href="__PUBLIC__/js/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body>
+<div class="welfare">
+    <a href="https://ukl.io"><img src="../public/images/logo.png" border="0" alt="" style="width: 100px;height: 42px;position: absolute;left: 10px;top: 10px;"></a>
+    <a class="rules" href="{:url('rules')}" style="">活动规则</a>
+    <span class="first">加入UKL体验最优质的</span>
+    <span class="second">{$web_title}</span>
+    <span class="third"><em>一重礼 注册、邀请得积分，积分可换ETH</em>
+        <em>二重礼 好项目随时发车、优质代币送不停</em>
+        <em>三重礼 招募梦想合伙人，共同点燃财富梦想</em></span>
+    <span class="third_1"></span>
+    <span class="third_2"></span>
+</div>
+
+<div class=" invitation">
+    <div>
+        <a class="show">+86</a>
+        <span>|</span>
+        <input type="hidden" name="invitation_code" id="invitation_code" value="{$invitation_code}">
+        <input type="hidden" name="invitee_country_code" id="invitee_country_code" value="86">
+        <input type="text" name="invitee_mobile" id="invitee_mobile" placeholder="请输入手机号码" class="phone">
+    </div>
+
+    <button id="submit" class="btn btn-primary btn-lg" style="background-color: #8080c1">接受邀请领福利</button>
+    <span>(积分可兑换 <i>ETH</i>)</span>
+</div>
+
+<!--国家列表手机号-->
+<div class='country_number' >
+</div>
+
+<!-- 图形验证码验证 -->
+<div class="modal fade" id="picModal" tabindex="-1" role="dialog" aria-labelledby="picModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="width: 100%;height: 100%;position: absolute;">
+    <div class="modal-dialog" role="document" style="width: 100%;height: 222px;position: absolute;top: 50%;margin-top: -111px;">
+        <div class="modal-content" style="width: 90%;margin-left: 5%;">
+            <div class="modal-body" style="height: 170px;">
+                <p>请输入图形验证码</p>
+                <p><img id="picCode" src="{:captcha_src()}" alt="captcha" style="width: 100%;" onclick="this.src='{:captcha_src()}'" /></p>
+                <p><input type="text" name="pic_code" id="pic_code" maxlength="6" placeholder="请输入图形验证码" style="width:100%;line-height:30px;border: 1px solid #888"></p>
+            </div>
+            <div class="modal-footer" style="width: 100%;height: 50px;padding:5px 10px;">
+                <button type="button" class="btn btn-default close-modal" data-dismiss="modal" style="">取消</button>
+                <button type="button" class="btn btn-primary sure pic_code_check" id="picsure ">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 验证码验证 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="width: 100%;height: 100%;position: absolute;">
+    <div class="modal-dialog" role="document" style="position: relative;top: 50%;margin-top: -130px;">
+        <div class="modal-content" style="width: 90%;margin-left: 5%;">
+            <div class="modal-body" style="height: 170px;">
+                <p style="">请输入验证码</p>
+                <p style="">
+                    <span id="phone"></span>
+                    <button id="btn" type="button" onclick="invokeSettime('#btn')" style="">获取验证码</button>
+                    <input type="text" placeholder="请输入短信验证码" maxlength="6" name="mobile_code" id="mobile_code" style="">
+                </p>
+            </div>
+            <div class="modal-footer" style="width: 100%;height: 50px;padding: 0;">
+                <button type="button" class="btn btn-default close-modal" data-dismiss="modal" style="">取消</button>
+                <button type="button" class="btn btn-primary sure btn-lg" id="sure">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 邀请 -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false" style="width: 100%;height: 100%;position: absolute;">
+    <div class="modal-dialog" role="document" style="position: relative;top: 50%;margin-top: -130px;">
+        <div class="modal-content" style="width: 90%;margin-left: 5%;">
+            <div class="modal-body" style="height: 300px;padding: 0;">
+                <div class="title" >
+                    <span >领取成功</span>
+                    <button type="button" class="btn btn-default close-modal" id="down_close" style="">X</button>
+                </div>
+
+                <img src="../public/images/sure.png" alt="" style="">
+
+                <span style="" class="congratulations">恭喜您获得 <i style="">50</i> 积分</span>
+
+                <a href="down.html" class="down" style="">下载APP</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layer" style=""></div>
+
+</body>
+<script type="text/javascript" src="__PUBLIC__js/jquery-1.12.4.min.js"></script>
+<script src="__PUBLIC__/js/bootstrap/js/bootstrap.js"></script>
+<script>
+    window.alert = function(name){
+        var iframe = document.createElement("IFRAME");
+        iframe.style.display="none";
+        iframe.setAttribute("src", 'data:text/plain,');
+        document.documentElement.appendChild(iframe);
+        window.frames[0].window.alert(name);
+        iframe.parentNode.removeChild(iframe);
+    }
+
+    /*发送验证码、倒计时*/
+    function invokeSettime(obj){
+        invitee_country_code = $('#invitee_country_code').val();
+        invitee_mobile = $('#invitee_mobile').val();
+        $.ajax({
+            url: "sendCode",
+            type: "POST",
+            data:{'country_code':invitee_country_code,'mobile':invitee_mobile},
+            dataType: "json",
+            success: function(data) {
+                // alert(data.message);
+                $('#myModal').modal('show');
+
+                //60秒倒计时
+                var countdown=60;
+                settime(obj);
+                //定时器
+                function settime(obj) {
+                    if (countdown == 0) {
+                        clearTimeout(time1);
+                        $(obj).attr("disabled",false);
+                        $(obj).css('background-color','skyblue');
+                        $(obj).text("获取验证码");
+                        countdown = 60;
+                        return;
+                    } else {
+                        $(obj).attr("disabled",true);
+                        $(obj).css('background-color','#ccc');
+                        $(obj).text("(" + countdown + ") s 重新发送");
+                        countdown--;
+                    }
+                    time1 = setTimeout(function() {
+                            settime(obj);}
+                        ,1000)
+                }
+            },
+            error:function (error) {
+                alert(error.responseJSON.message);
+                $('.layer').css('display','none');
+                return false;
+            }
+        })
+
+    }
+
+    /*获取国家列表信息*/
+    $('.invitation div a').click(function () {
+        $('.country_number').addClass('animate');
+        $('.country_number').css('display','block');
+        // $('.layer').css('display','block');
+
+        $.ajax({
+            url: "getCountryCode",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                // console.log(data);return false;
+                $.each(data['data'], function(i, item) {
+                    $('.country_number').append(" <li>" +data['data'][i].cn_name+  "<span style='float:right;color: #9e9ea2' data_value='"+data['data'][i].tel_code+"'>"+"+"+data['data'][i].tel_code+"</span>"  + " </li>");
+                    // console.log(data[i].cn_name);
+                })
+
+                $('.country_number li').click(function () {
+                    /*获取到点击的号码*/
+                    var num = $(this).find("span").html();
+                    $('.country_number').css('display','none');
+                    // console.log($(this).find("span").attr('data_value'));
+                    $('#invitee_country_code').val($(this).find("span").attr('data_value'));
+                    $('.invitation .show').html(num)
+                })
+
+                var wait=setInterval(function(){
+                    if(!$(".country_number").is(":animated")){
+                        clearInterval(wait);
+                        //执行code
+                        $('.layer').css('display','none');
+                    }
+                },1000);
+            }
+        })
+    });
+
+    //图形校验
+    $('#submit').click(function(){
+        $('.layer').css('display','block');
+        //手机号码检查
+        invitation_code = $('#invitation_code').val();
+        invitee_country_code = $('#invitee_country_code').val();
+        invitee_mobile = $('#invitee_mobile').val();
+        if(!invitation_code){
+            alert('无效的邀请页面！');
+            $('.layer').css('display','none');
+            return false;
+        }
+        if(!invitee_mobile){
+            $('.layer').css('display','none');
+            alert('请输入手机号码！');
+            return false;
+        }
+        $('#picCode').attr('src','{:captcha_src()}');
+        $("input[name='pic_code']").val('');
+        $('#picModal').modal('show')
+
+    })
+
+    //检查页面有效性
+    $('.pic_code_check').click(function(){
+
+        //验证验证码操作
+
+        //验证成功成功
+        $('#picModal').modal('hide');
+
+        //手机号码检查
+        invitation_code = $('#invitation_code').val();
+        invitee_country_code = $('#invitee_country_code').val();
+        invitee_mobile = $('#invitee_mobile').val();
+        pic_code = $('#pic_code').val();
+        if(!invitation_code){
+            alert('无效的邀请页面！');
+            $('.layer').css('display','none');
+            return false;
+        }
+        if(!invitee_mobile){
+            $('.layer').css('display','none');
+            alert('请输入手机号码！');
+            return false;
+        }
+
+        $.ajax({
+            url: "checkInvitation",
+            type: "GET",
+            data:{'invitation_code':invitation_code,'invitee_country_code':invitee_country_code,'invitee_mobile':invitee_mobile,'pic_code':pic_code},
+            dataType: "json",
+            success: function(data) {
+                $('#phone').html(invitee_mobile);
+                invokeSettime('#btn');
+
+                // invite(invitation_code,invitee_country_code,invitee_mobile);
+            },
+            error:function (error) {
+                // $('#pic_code').val('');
+                $('.layer').css('display','none');
+                alert(error.responseJSON.message);
+            }
+        })
+    })
+
+    //接受邀请操作
+    function invite(){
+        invitation_code = $('#invitation_code').val();
+        invitee_country_code = $('#invitee_country_code').val();
+        invitee_mobile = $('#invitee_mobile').val();
+        mobile_code = $('#mobile_code').val();
+        if(!invitation_code){
+            $('.layer').css('display','none');
+            alert('无效的邀请页面！');
+            return false;
+        }
+        if(!invitee_mobile){
+            $('.layer').css('display','none');
+            alert('请输入手机号码！');
+            return false;
+        }
+        if(!mobile_code){
+            alert('请输入验证码！');
+            return false;
+        }
+        $.ajax({
+            url: "acceptInvitation",
+            type: "GET",
+            data:{'invitation_code':invitation_code,'invitee_country_code':invitee_country_code,'invitee_mobile':invitee_mobile,'mobile_code':mobile_code},
+            dataType: "json",
+            success: function(data) {
+                // alert(data.message);
+                $('#myModal').modal('hide');
+                $('#myModal1').modal('show')
+            },
+            error:function (error) {
+                $('.layer').css('display','none');
+                alert(error.responseJSON.message)
+            }
+        })
+    }
+
+
+
+    $('#sure').click(function () {
+        invite();
+    })
+    $('.close').click(function () {
+        $('.success').css('display','none')
+    })
+    $('#down_close').click(function () {
+        window.location.reload();
+    })
+    $('.close-modal').click(function () {
+        $('.layer').css('display','none');
+    })
+    $('#myModal').on('hide.bs.modal', function () {
+        $('#mobile_code').val('');
+    })
+</script>
+</html>

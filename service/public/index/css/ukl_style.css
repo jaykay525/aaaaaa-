@@ -1,0 +1,398 @@
+
+
+
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+    }
+
+    a{
+        text-decoration: none;
+        color: #ffffff;
+    }
+
+    html,body{
+        width: 100%;
+        height: 100%;
+    }
+
+    .mobile_qrCode{
+        display: none;
+    }
+
+
+.message {
+    color: white;
+}
+.bBox {
+    width: 100%;
+    height: 1080px;
+    background: url('../images/bj.jpg') no-repeat ;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.bBox>img {
+    position: absolute;
+    width: 180px;
+    height: 70px;
+    top: 35px;
+    left: 20px;
+}
+.font{
+    width: 900px;
+    height: 120px;
+    position: absolute;
+    top: 50%;
+    margin-top: -180px;
+    left: 50%;
+    margin-left: -450px;
+}
+.font span:first-child {
+    font-weight: bold;
+    color: white;
+    font-size: 45px;
+}
+.font span:nth-child(2) {
+    color: white;
+    font-size: 35px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.box {
+    width: 500px;
+    height: 250px;
+    position: absolute;
+    bottom: 200px;
+    right: 30px;
+}
+.andriod {
+    width: 220px;
+    height: 250px;
+    border: 4px solid white;
+    box-sizing: border-box;
+    float: left;
+    text-align: center;
+    z-index: 22;
+}
+.andriod img:first-child {
+    position: absolute;
+    left: 50%;
+    margin-left: -180px;
+    top: 50%;
+    margin-top: -60px;
+}
+.andriod span {
+    font-weight: bold;
+    color: white;
+    font-size: 30px;
+    display: block;
+    margin-top: 180px;
+}
+.ios {
+    width: 220px;
+    height: 250px;
+    border: 4px solid white;
+    float: right;
+    box-sizing: border-box;
+    text-align: center;
+}
+.ios img:first-child {
+    position: absolute;
+    top: 50%;
+    margin-top: -60px;
+    margin-left: -35px;
+}
+.ios span {
+    font-weight: bold;
+    color: white;
+    font-size: 30px;
+    display: block;
+    margin-top: 180px;
+}
+.bottom {
+    width: 100%;
+    height: 200px;
+    background-color: #000000;
+    position: relative;
+    text-align: center;
+}
+.bottom>div {
+    width: 1200px;
+    height: 140px;
+    position: absolute;
+    left: 50%;
+    margin-left: -600px;
+    border-bottom: 2px solid #434343;
+}
+.left {
+    width: 200px;
+    height: 100%;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    left: 100px;
+}
+.left span {
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 20px;
+}
+.weixin {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 15px;
+    left: 40px;
+}
+.fenxiang {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 15px;
+    right: 40px;
+}
+.img3 {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: -200px;
+    left: -30px;
+    display: none;
+}
+.img4 {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: -200px;
+    left: 50px;
+    display: none;
+}
+.message {
+    width: 700px;
+    height: 45px;
+    position: absolute;
+    bottom: 15px;
+    left: 350px;
+}
+.message li{
+    position: absolute;
+}
+.message li:first-child{
+    left: 0;
+    top: 0;
+}
+.message li:nth-child(2) {
+    left: 250px;
+    top: 0;
+}
+.message li:nth-child(3) {
+    bottom: 0;
+    left: 0;
+}
+.message li:nth-child(4) {
+    left: 250px;
+    bottom: 0;
+}
+.bottom>span {
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    width: 400px;
+    left: 50%;
+    margin-left: -200px;
+}
+
+.img1 {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -240px;
+    margin-top: -100px;
+    top: 50%;
+    display: none;
+    transform:rotateY(180deg);
+}
+.img2 {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: 40px;
+    margin-top: -100px;
+    top: 50%;
+    display: none;
+    transform:rotateY(180deg);
+}
+.rotate {
+    animation: page 0.5s ;
+}
+.rotate1 {
+    animation: page1 1s;
+}
+@keyframes page {
+    0%{
+        transform: rotatey(0deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotatey(-180deg);
+        opacity: 1;
+    }
+}
+
+@keyframes page1 {
+    0%{
+        transform: rotatey(-180deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotatey(0deg);
+        opacity: 0;
+    }
+}
+
+    @media screen and (max-width: 1200px) {
+        body{
+            font-family:Helvetica;
+        }
+        .bBox {
+            height: 100% !important;
+            background: url("../images/mobile-bj.jpg") no-repeat !important;
+            background-position: center !important;
+            background-size: cover !important;
+        }
+        .bBox>img {
+            width: 95px !important;
+            height: 40px !important;
+            top: 10px !important;
+            left: 10px !important;
+        }
+        .font{
+            width: 100% !important;
+            left: 0 !important;
+            top: 40% !important;
+            margin-left: 0 !important;
+            margin-top: 0 !important;
+            height: 70px !important;}
+        .font span:first-child {
+            font-size: 22px!important;
+            padding: 0 10px;
+        }
+        .font span:nth-child(2) {
+            font-size: 18px !important;
+            padding: 0 10px;
+        }
+        .box {
+            display: none;
+        }
+        .mobile_qrCode {
+            display: block;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            bottom: 20%;
+            right: 50%;
+            margin-right: -100px;
+        }
+        .mobile_qrCode button {
+            width: 150px;
+            height: 40px;
+            position: absolute;
+            font-size: 17px;
+            border-radius: 5px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            border: 2px solid #fff;
+            box-sizing: border-box;
+            font-weight: bold;
+            left: 50%;
+            margin-left: -75px;
+            top: 100%;
+        }
+        .bottom>div {
+            width: 100% !important;
+            left: 0 !important;
+            height: 150px !important;
+            margin-left: 0!important;
+        }
+        .bottom .left {
+            display: none;
+        }
+        .message {
+            width: 100% !important;
+            left: 0 !important;
+            top: 25px !important;
+        }
+        .message li {
+            font-size: 12px;
+            /*width: 100%;*/
+            padding-left: 20px;
+        }
+        .message li:nth-child(2) {
+            left: 0!important;
+            top: 50px !important;
+        }
+        .message li:nth-child(4) {
+            left: 0!important;
+            bottom: -50px !important;
+        }
+        .bottom>span {
+            font-size: 13px;
+            width: 300px !important;
+            margin-left: -150px !important;
+        }
+        #mask {
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            text-align:center;
+            background:#000;
+            z-index:10;
+            overflow:hidden;
+            opacity:0.6;
+        }
+        .weixinTip { font-size:1.2rem;
+            position:fixed;
+            top:0;
+            left: 0;color:#333;
+            line-height:2.2rem;
+            border:0 none;
+            z-index:100;
+        }
+        .hide{
+            display:none;
+        }
+        .android_tip{
+            width:100%;
+            height:100%;
+            background-size: 100% auto;
+            background-repeat:no-repeat;
+            background-image:url(../images/weixin_down_android_tip.png);
+        }
+        .ios_tip{
+            width:100%;
+            height:100%;
+            background-size: 100% auto;
+            background-repeat:no-repeat;
+            background-image:url(../images/weixin_down_ios_tip.png);
+        }
+        .chinese {
+            display: block !important;
+        }
+        .describe {
+            display: block !important;
+        }
+
+    }
+
+

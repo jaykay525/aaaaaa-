@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$info.title}</title>
+    <link rel="stylesheet" href="../public/css/details.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+</head>
+<body>
+    <div class="news">
+        <!--项目介绍-->
+        <div>
+            <!--顶部标题-->
+            <div class="news-title">
+                <p>{$info.title}</p>
+                <span >{$info.time_ago}</span>
+            </div>
+
+            <!--详情链接-->
+            <div class="news-link">
+                <span>本文来源：{$info.source}</span>
+
+                <a href="{$info.url}" style="">查看原文</a>
+            <img src="/public/index/images/news/watch.png" alt="" style="">
+        </div>
+            <!--详情内容-->
+            <div class="news-content">
+                <!--新闻内容开始-->
+                <div class="news" >
+                    <div class="img-wrapper-embedded" style="width: 100%; min-height: 438px;">
+                        {$info.content}
+                    </div>
+                </div>
+                <!--新闻内容结束-->
+                <div class="transparent-bj"></div>
+                <img src="/public/index/images/news/u1943.png" alt="" class="open" style="bottom: 60px;">
+            </div>
+            <!--跳转按钮-->
+            <a><button id="btnNews" class="read" >打开UKL.IO ,阅读体验更佳</button></a>
+        </div>
+
+        <div class="link-invite"></div>
+        <div class="phone"></div>
+    </div>
+</body>
+<script type="text/javascript" src="__PUBLIC__js/jquery-1.12.4.min.js"></script>
+<script>
+    var height =$(window).height();
+    console.log(height);
+    var news_height = $('.news').height();
+    console.log(news_height);
+
+    if(news_height<height){
+        $('.news-content').css('overflow','visible');
+        $('.news-content .transparent-bj').css('display','none');
+        $('.read').css('display','none');
+        $('.open').css('display','none');
+        $(this).css('display','none')
+    }
+
+
+    $('.news-content').css('height',height*1.17);
+    $('.news-content .open').click(function () {
+        $('.news-content').css('overflow','visible');
+        /*修改滚动条bug*/
+        $('.news-content').css('height','auto');
+        $('.news-content .transparent-bj').css('display','none');
+        $('.read').css('display','none');
+        $(this).css('display','none')
+    });
+
+    /***
+     * is_ios、is_android、is_weixin分别判断是ios还是Android还是wechat
+     * #btn,.link-invite点击之后跳转到App对应的页面，没有安装App跳转到邀请页面
+     */
+
+    var is_ios     = /(iPhone|iPad|iPod)/ig.test(navigator.userAgent);
+
+    var is_android = /(android)/ig.test(navigator.userAgent);
+
+    var is_weixin  = /(micromessenger)/ig.test(navigator.userAgent);
+
+    $('#btnNews,.link-invite').click(function (e) {
+        if (is_weixin) {
+            window.location.href='{$invite_url}'
+        }else if (!is_weixin&&is_android) {
+            //  Android打开项目详情 &28拼接的参数
+            window.location.href='ukl://newsdetail?id={$info.article_id}';
+        }else if (!is_weixin&&is_ios){
+            //  IOS打开项目详情 &28拼接的参数
+            window.location.href='uklioapp://?parame=2&{$info.article_id}';
+        }
+        // 否则打开a标签的href链接
+        window.setTimeout(function(){
+            window.location.href='{$invite_url}'
+        },4000)
+    });
+
+</script>
+</html>

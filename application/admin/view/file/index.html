@@ -1,0 +1,92 @@
+{include file="public/header" /}
+
+<form method="get" action="{:url('index')}" novalidate="true">
+	<section class="panel panel-default search-from">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>查询条件</div>
+		</header>
+		<div class="panel-body">
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="user_id" value="{$user_id}" placeholder="用户ID">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="savename" value="{$savename}" placeholder="文件名">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					{php}$all_ext = model('File')->getAllExt();{/php}
+					<select name="ext">
+						<option value="">全部后缀</option>
+						{volist name="all_ext" id="extk"}
+							<option value="{$extk}" {$extk == $ext ? 'selected' : ''}>{$extk}</option>
+						{/volist}
+					</select>
+				</div>
+			</div>
+			<div class="form-group-submit">
+				<button type="submit" class="btn btn-info"><i class="icon-search"></i>查询</button>
+			</div>
+		</div>
+	</section>
+</form>
+
+<table class="data-list">
+	<tbody>
+		<tr>
+			<th width="40"><input type="checkbox" onclick="$.checkbox(this,'.select-box')"></th>
+			<th>文件ID</th>
+			<th>图标</th>
+			<th>文件名</th>
+			<th>大小</th>
+			<th>OSS时间</th>
+			<th>上传时间</th>
+			<th>操作</th>
+		</tr>
+		{volist name="list" id="rs"}
+			<tr class="data-{$rs['file_id']}">
+				<td class="select-box">
+					<input type="checkbox" name="ids[]" value="{$rs['file_id']}">
+				</td>
+				<td>{$rs['file_id']}</td>
+				<td><a href="{$rs['icon_url']}" class="view_big_pic"><img src="{$rs['icon_url']}" width="40" height="40"></a></td>
+				<td>{$rs['filename']}</td>
+				<td>{:filesize_desc($rs['size'])}</td>
+				<td>
+					{gt name="rs.oss_time" value="0"}
+						{:date('Y-m-d H:i:s', $rs['oss_time'])}
+					{else}
+						<a href="{:url('upload_oss', array('file_id' => $rs['file_id']))}" class="opt-tip" label-class="oss-time-{$rs['file_id']}"><i class="icon-upload"></i>上传至OSS</a>
+					{/gt}
+				</td>
+				<td>{:date('Y-m-d H:i:s', $rs['create_time'])}</td>
+				<td>
+					<a href="{$rs['file_url']}" class="btn btn-default" target="_blank">
+						<i class="icon-view"></i>
+					</a>
+					{gt name="rs.oss_time" value="0"}
+						<a href="{:url('down_oss_file', array('file_id' => $rs['file_id']))}" class="opt-tip btn btn-default">
+							<i class="icon-download-cloud"></i>
+						</a>
+					{/gt}
+					<a class="btn btn-default confirm-opt" href="{:url('delete', array('file_id' => $rs['file_id']))}" title="删除" msg="您确认要删除此文件？" del-class="data-{$rs['file_id']}">
+						<i class="icon-delete"></i>
+					</a>
+				</td>
+			</tr>
+		{/volist}
+	</tbody>
+</table>
+
+<div class="opt-page-box">
+	<ul class="button-group">
+		<li class="btn bg-default batch-opt delete-opt" url="{:url('delete')}"><i class="icon-delete"></i>批量删除</li>
+		<li class="btn bg-default win" url="{:url('File/win_upload', array('is_mulit' => 1, 'upload_type' => 'all'))}" title="上传文件"><i class="icon-upload"></i>上传</li>
+	</ul>
+	{$page}
+</div>
+
+{include file="public/footer" /}

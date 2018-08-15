@@ -1,0 +1,185 @@
+{include file="public/header" /}
+
+<div class="col-6">
+	<form action="">
+		<section class="panel panel-default">
+			<header class="panel-header">
+				<div class="title"><i class="icon-arrow-down-solid"></i>基本表单</div>
+			</header>
+			<div class="panel-body">
+				<div class="form-group">
+					<div class="name">用户名</div>
+					<div class="input">
+						<input type="text" name="username" placeholder="用户名不能为空！" required>
+						<div class="help">6位以上字符</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<span class="name">密码</span>
+					<div class="input">
+						<input type="password" name="password" placeholder="密码不能为空！" required>
+					</div>
+				</div>
+				<div class="form-group-submit">
+					<button type="submit" class="btn btn-sm bg-info"><i class="icon-save"></i>保存</button>
+					<button type="button" class="btn btn-sm bg-cancel jump"><i class="icon-back"></i>返回</button>
+				</div>
+			</div>
+		</section>
+	</form>
+</div>
+
+<div class="col-6">
+	<form class="ajax-from" method="post">
+		<section class="panel panel-default">
+			<header class="panel-header">
+				<div class="title"><i class="icon-arrow-down-solid"></i>表单验证(属性设置)</div>
+			</header>
+			<div class="panel-body">
+				<div class="form-group">
+					<div class="name">必填</div>
+					<div class="input">
+						<input type="text" name="required" placeholder="required" required>
+						<div class="help">required</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">手机号</div>
+					<div class="input">
+						<input type="text" name="mobile" placeholder="手机号不能为空" required mobile="true">
+						<div class="help">required mobile="true"</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">E-mail</div>
+					<div class="input">
+						<input type="text" name="email" placeholder="E-mail不能为空" required email="true">
+						<div class="help">required email="true"</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">网址</div>
+					<div class="input">
+						<input type="text" name="url" placeholder="URL不能为空，如http://www.abc.com" required url="true">
+						<div class="help">required url="true"</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">日期</div>
+					<div class="input">
+						<input type="text" name="date" placeholder="日期不能为空，如2016-12-12" required date="true">
+						<div class="help">required date="true"</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">数字</div>
+					<div class="input">
+						<input type="text" id="number" name="number" placeholder="数字不能为空，如123.22" required number="true">
+						<div class="help">required number="true"</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">整数</div>
+					<div class="input">
+						<input type="text" name="digits" placeholder="整数不能为空，如2016" required digits="true">
+						<div class="help">required digits="true"</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">信用卡/储蓄卡</div>
+					<div class="input">
+						<input type="text" name="creditcard" placeholder="信用卡不能为空" required creditcard="true">
+						<div class="help">required creditcard="true"</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">身份证</div>
+					<div class="input">
+						<input type="text" name="cardno" placeholder="身份证不能为空" required cardno="true">
+						<div class="help">required cardno="true"</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="name">与上面数字相同</div>
+					<div class="input">
+						<input type="text" name="equalTo" placeholder="请填写与上面数字相同" required equalTo="#number">
+						<div class="help">required equalTo="#field"</div>
+					</div>
+				</div>
+				<div class="tips">
+					<p>
+						表单验证使用插件为jQuery Validate，具体使用说明，请<a href="http://www.runoob.com/jquery/jquery-plugin-validate.html" target="_blank">点击此处</a>
+					</p>
+					<p>
+						注：其它验证，如身份证、手机号、电话等使用，请查看/public/js/jquery-plugin/init.js说明
+					</p>
+				</div>
+				<div class="form-group-submit">
+					<button type="submit" class="btn btn-sm bg-info"><i class="icon-save"></i>保存</button>
+					<button type="button" class="btn btn-sm bg-cancel jump"><i class="icon-back"></i>返回</button>
+				</div>
+			</div>
+		</form>
+	</section>
+</div>
+
+<div class="col-12">
+	<form class="ajax-form" method="get" action="">
+		<section class="panel panel-default">
+			<header class="panel-header">
+				<div class="title"><i class="icon-arrow-down-solid"></i>列表搜索表单</div>
+			</header>
+			<div class="panel-body">
+				<div class="col-3">
+					<div class="form-group">
+						<div class="name">用户ID</div>
+						<div class="input">
+							<input type="text" name="u1" placeholder="">
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="form-group">
+						<span class="name">用户名</span>
+						<div class="input">
+							<input type="text" name="i2" placeholder="">
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="form-group">
+						<span class="name">姓名</span>
+						<div class="input">
+							<input type="text" name="i2" placeholder="">
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="form-group">
+						<span class="name">手机号</span>
+						<div class="input">
+							<input type="text" name="i2" placeholder="">
+						</div>
+					</div>
+				</div>
+				<div class="col-3">
+					<div class="form-group">
+						<span class="name">E-mail</span>
+						<div class="input">
+							<input type="text" name="i2" placeholder="">
+						</div>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-group-submit">
+						<button type="submit" class="btn btn-info"><i class="icon-search"></i>查询</button>
+						<button type="button" class="btn btn-danger"><i class="icon-download"></i>导出</button>
+						<button type="button" class="btn bg-cancel jump"><i class="icon-back"></i>返回</button>
+					</div>
+				</div>
+			</div>
+		</section>
+	</form>
+</div>
+
+{include file="public/footer" /}

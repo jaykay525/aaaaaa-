@@ -1,0 +1,521 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+html,body {
+    width: 100%;
+    height: 100%;
+}
+
+a:hover, a:visited, a:link, a:active {
+    color: white;
+    text-decoration: navajowhite;
+}
+
+#mask{
+    position:fixed; left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    text-align:center;
+    background:#000;
+    z-index:10;
+    overflow:hidden;
+    opacity:0.6;
+}
+.weixinTip{ font-size:1.2rem;
+    position:fixed;
+    top:0px;
+    left: 0;color:#333;
+    line-height:2.2rem;
+    border:0 none;
+    z-index:100;
+}
+
+.hide{
+    display:none;
+}
+.android_tip{
+    width:100%;
+    height:100%;
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    background-image:url(../images/weixin_down_android_tip.png);
+}
+.ios_tip{
+    width:100%;
+    height:100%;
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    background-image:url(../images/weixin_down_ios_tip.png);
+}
+
+.download {
+    width: 100%;
+    height: 100%;
+    background: url('../images/download.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.download button {
+    position: absolute;
+    width: 150px;
+    height: 40px;
+    bottom: 11%;
+    left: 50%;
+    font-size: 17px;
+    margin-left: -75px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: transparent;
+    color: white;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+}
+
+
+.welfare {
+    background: url('../images/welfare.jpg') no-repeat;
+    width: 100%;
+    height: 60%;
+    min-height: 300px;
+    background-size: cover;
+    position: relative;
+    padding-left: constant(safe-area-inset-left);
+    padding-right: constant(safe-area-inset-right);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-top: constant(safe-area-inset-top);
+}
+
+.invitation{
+    width: 100%;
+    height: 40%;
+    background-color: #f9f5fa;
+    /*opacity: 0.06;*/
+    position: relative
+}
+
+.invitation>div {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    height: 45px;
+    top: 30px;
+    line-height: 45px;
+    border: 1px solid #dbdcdc;
+    box-sizing: border-box
+}
+
+.invitation a {
+    height: 100%;
+    width: 28%;
+    color: black !important;
+    position: absolute;
+    top: 0;
+    border: none;
+    padding-left: 5px;
+    font-size: 13px;
+    box-sizing: border-box;
+    background: url("../images/arrow.png") no-repeat 40px 13px;
+    background-size: 20px 20px;
+    text-decoration: none;
+    background-color: white;
+}
+
+.invitation div span{
+    display: inline-block;
+    width: 2px;
+    z-index: 0;
+    position: absolute;
+    left: 25%;
+    top: -5%;
+    color: #9fa0a0;
+}
+
+.invitation  option {
+    text-align: center;
+}
+
+.invitation .phone {
+    width: 72%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    box-sizing: border-box;
+    border: none;
+    padding-left: 10px;
+}
+
+.invitation button {
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    height: 40px;
+    top: 100px;
+    /*background-color: transparent;*/
+    border: none;
+    background-color:#8080c1;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 2px;
+    border-radius: 4px
+}
+
+.invitation>span{
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    height: 40px;
+    top: 160px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.invitation>span i{
+    font-style: normal;
+    color: #9454ad;
+}
+
+.animate{
+    -webkit-animation: float  1s ;
+    animation: float 1s;
+    animation-fill-mode:forwards;
+    -webkit-animation-fill-mode:forwards;
+}
+
+
+
+@-webkit-keyframes float {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+
+}
+@keyframes float {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
+
+}
+
+.country_number {
+    display: none;
+    width: 100%;
+    max-height:100%;
+    background-color: white;
+    position: absolute;
+}
+
+.country_number li {
+    border-bottom: 1px solid #ccc;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+}
+
+
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #999;
+    opacity: 0.5;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999;
+    opacity: 0.5;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;
+    opacity: 0.5;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #999;
+    opacity: 0.5;
+}
+
+
+#myModal1 .title {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: #3a519f;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-align: center;
+    padding-right: 15px;
+    box-sizing: border-box;
+}
+
+#myModal1 .title span{
+    color: white;
+}
+
+#myModal1 .title span:first-child {
+    font-size: 22px;
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+}
+
+#myModal1 img {
+    width: 80px;
+    position: absolute;
+    left: 50%;
+    margin-left: -40px;
+    top: 75px;
+}
+
+#myModal1 .congratulations {
+    color: #7e7eba;
+    width: 160px;
+    position: absolute;
+    left: 50%;
+    margin-left: -80px;
+    text-align: center;
+    top: 180px;
+}
+
+#myModal1 .congratulations i {
+    font-style: normal;
+    font-size: 25px;
+}
+
+#myModal1 .down {
+    width: 150px;
+    height: 40px;
+    background-color: #807fc1;
+    position: absolute;
+    left: 50%;
+    margin-left: -75px;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    border-radius: 5px;
+    top: 240px;
+}
+
+.rules {
+    width: 80px;
+    height: 30px;
+    background-color: #00d1ff;
+    color: white;
+    position: absolute;
+    right: 0;
+    top: 100px;
+    text-align: center;
+    line-height: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    text-decoration: none
+}
+
+#myModal .modal-body p:first-child {
+    position: relative;
+    left: 50%;
+    width: 150px;
+    text-align: center;
+    margin-left: -75px;
+    font-size: 18px;
+}
+
+#myModal .modal-body p:nth-child(2) {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+#myModal .modal-body p:nth-child(2) button {
+    float: right;
+    background-color: skyblue;
+    border: 1px solid skyblue;
+    color: white;
+    font-size: 15px;
+    padding: 0 5px;
+    border-radius: 4px
+}
+
+#myModal .modal-body p:nth-child(2) input {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding-left: 50px;
+    background: url('../images/Verification_code.png') no-repeat 10px 12px;
+    background-size: 20px 20px
+}
+
+#myModal .modal-footer button{
+    border-radius: 0;
+}
+
+#myModal .modal-footer button:first-child {
+    width: 50%;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    background-color: whitesmoke;
+    border-bottom-left-radius: 5px;
+}
+
+#myModal .modal-footer button:nth-child(2) {
+    width: 50%;
+    height: 100%;
+    float: right;
+    box-sizing: border-box;
+    margin-left: 0;
+    border-bottom-right-radius: 5px;
+}
+
+#myModal1 .title button {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 18px
+}
+
+.welfare span {
+    color: white;
+    position: absolute;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+}
+
+.welfare .first{
+    width: 100%;
+    padding-left: 10px;
+    bottom: 170px;
+    left: 0;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.welfare .second{
+    width: 100%;
+    bottom: 140px;
+    font-size: 26px;
+    /*font-weight: bold;*/
+    left: 0;
+    padding-left: 10px;
+    letter-spacing: 1px;
+}
+
+.welfare .third {
+    width: 325px;
+    bottom: 20px;
+    left: 10px;
+    /*background-color: white;*/
+    color: #fff;
+    /*text-align: center;*/
+    border-radius: 7px;
+    border-left: 1.5px #fff solid;
+    border-right: 1.5px #fff solid;
+    border-bottom: 1.5px #fff solid;
+    line-height: 20px;
+    height: 115px;
+    padding: 15px;
+    letter-spacing: 1px;
+}
+.welfare .third em{
+    font-style: normal;
+    padding:4px 0;
+    display: block;
+}
+
+.welfare .third_1 {
+    width: 50px;
+    bottom: 20px;
+    left: 10px;
+    /*background-color: white;*/
+    color: #fff;
+    /*text-align: center;*/
+    border-top-left-radius: 7px;
+    border-top: 1.5px #fff solid;
+    line-height: 20px;
+    height: 115px;
+    padding: 15px;
+}
+.welfare .third_2 {
+    width: 50px;
+    bottom: 20px;
+    left: 285px;
+    /*background-color: white;*/
+    color: #fff;
+    /*text-align: center;*/
+    border-top-right-radius: 7px;
+    border-top: 1.5px #fff solid;
+    line-height: 20px;
+    height: 115px;
+    padding: 15px;
+}
+
+.layer {
+    display:none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+@media screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2){
+    .welfare .third {
+        width: 285px;
+        bottom: 20px;
+        left: 10px;
+        /*background-color: white;*/
+        color: #fff;
+        /*text-align: center;*/
+        border-radius: 7px;
+        border-left: 1.5px #fff solid;
+        border-right: 1.5px #fff solid;
+        border-bottom: 1.5px #fff solid;
+        line-height: 20px;
+        height: 115px;
+        padding: 15px;
+        letter-spacing: 1px;
+    }
+
+    .welfare .third em{
+        font-style: normal;
+        padding:4px 0;
+        display: block;
+        font-size: 12px;
+    }
+
+    .welfare .third_2 {
+        width: 50px;
+        bottom: 20px;
+        left: 245px;
+        /*background-color: white;*/
+        color: #fff;
+        /*text-align: center;*/
+        border-top-right-radius: 7px;
+        border-top: 1.5px #fff solid;
+        line-height: 20px;
+        height: 115px;
+        padding: 15px;
+    }
+}

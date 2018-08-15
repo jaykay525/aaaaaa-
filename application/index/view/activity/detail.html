@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>糖果空投</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="__PUBLIC__js/bootstrap/css/bootstrap.css">
+    <style>
+        img{
+            pointer-events: none;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        html,body {
+            width: 100%;
+            height: 100%;
+        }
+        .candy-box {
+            width: 100%;
+            height: 100%;
+        }
+        .candy-box>img {
+            width: 100%;
+            height: auto;
+        }
+        .candy-box>p {
+            width: 100%;
+            height: 40px;
+            margin-top: 20px;
+            text-align: center;
+            color: #a7a7a7;
+        }
+        .candy-box .gift {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle
+        }
+        .candy-box .join {
+            margin-top: 5px;
+            height: 100%;
+            position: relative;
+            top: 3px;
+        }
+        .candy-box .join i {
+            font-style: normal;
+            color: #cfaa73
+        }
+        .candy-box>button {
+            width: 250px;
+            height: 40px;
+            background-color: #cfaa73;
+            position: relative;
+            left: 50%;
+            margin-left: -125px;
+            top: 0;
+            border: none;
+            border-radius: 3px;
+            font-size: 13px;
+            color: white
+        }
+        .candy-box>span {
+            width: 100%;
+            min-height: 100px;
+            display: block;
+            padding: 0 3%;
+            box-sizing: border-box;
+            margin-top: 15px;
+        }
+        .candy-box .introduction {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            margin-top: 20px;
+            position: relative;
+            text-align: center;
+            font-weight: bold;
+            color: #cfab74
+        }
+        .candy-box .introduction>span {
+            width: 29%;
+            height: 1px;
+            border: 0.5px solid #ececec;
+            position: absolute;
+        }
+        .candy-box .introduction>span:first-child {
+            top: 50%;
+            left: 3%;
+        }
+        .candy-box .introduction>span:nth-child(2) {
+            top: 50%;
+            right: 3%;
+        }
+        .candy-box>span img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="candy-box">
+    <img src="{$info.filepath}" alt="">
+    <p>
+        <img  class="gift" src="../public/images/candy-share_03.png" alt="">
+        &nbsp;<span class="join">已有 <i>{$join_num}</i>人参与领取礼包</span>
+    </p>
+    <button type="button" data-toggle="modal" data-target="#myModal1">领取礼包</button>
+    <div class="introduction">
+        <span></span>
+        <span></span>
+        {$info.theme}
+    </div>
+    <span>
+        {$info.theme_introduction}
+        </span>
+    <div class="introduction" style="margin-top: 0;">
+        <span></span>
+        <span></span>
+        UKL.IO 简介
+    </div>
+    <span>
+            找区块链好项目，就上UKL！第一时间发布热门项目、评级结果、募集进度。好项目随时发车、优质代币送不停 !
+        </span>
+</div>
+
+<!-- 邀请 -->
+<div class="modal fade positioning" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 90%;margin-left: 5%;">
+            <div class="modal-body" style="height: 150px;padding: 0;border: 1px solid gray;border-radius: 5px">
+                <div style="width: 100%;height: 40px;position: absolute;top: 50%;margin-top: -40px;text-align: center;line-height: 40px;">UKL用户独享，通过APP才可参与哦</div>
+                <div style="width: 100%;height: 50px;position: absolute;bottom: 0;">
+                    <button class="btn close-modal" data-dismiss="modal" style="width: 50%;height: 100%;position: absolute;left: 0;background-color: transparent;border: none;background-color: whitesmoke;border-bottom-right-radius: 0;border-top-right-radius: 0">取消</button>
+                    <button style="width: 50%;height: 100%;position: absolute;right: 0;background-color: transparent;border: none;box-sizing: border-box;background-color:#cfab74;color: white" id="openApp" >打开app领取</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" src="__PUBLIC__js/jquery-3.3.1.min.js"></script>
+<!--<script src="bootstrap.min.js"></script>-->
+<script type="text/javascript" src="__PUBLIC__js/bootstrap/js/bootstrap.js"></script>
+<script>
+$('#openApp').click(function(){
+    location.href="{$invite_url}";
+})
+function centerModals(){
+    $('#myModal1').each(function(i){
+        var $clone = $(this).clone().css('display', 'block').appendTo('body');
+        var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2);
+        top = top > 0 ? top : 0;
+        $clone.remove();
+        $(this).find('.modal-content').css("margin-top", top-30);
+    });
+}
+$('#myModal1').on('show.bs.modal', centerModals);      //当模态框出现的时候
+$(window).on('resize', centerModals);
+</script>
+</html>

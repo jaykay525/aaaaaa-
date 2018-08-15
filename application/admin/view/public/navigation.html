@@ -1,0 +1,15 @@
+<div class="navigation">
+	<ul>
+		<i class="icon-index"></i>
+		{php}$nav_count = count($_trail);{/php}
+		{volist name="_trail" id="nav"}
+			<li>
+				{eq name="nav_count" value="$i"}
+					{$nav['title']}
+				{else/}
+					<a href="{$nav['url']}">{$nav['title']}</a> / 
+				{/eq}
+			</li>
+		{/volist}
+	</ul>
+</div>

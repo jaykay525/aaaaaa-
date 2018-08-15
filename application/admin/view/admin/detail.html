@@ -1,0 +1,35 @@
+{include file="public/header" /}
+<div class="col-12">
+	<section class="panel panel-default">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>{$_cur_title}</div>
+		</header>
+		<div class="panel-body">
+			<div class="form-group">
+				<div class="name">用户名</div>
+				<div class="input">
+					<p class="label">{$_user['username']}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="name">姓名</div>
+				<div class="input">
+					<p class="label">{$_user['realname']}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="name">手机号</div>
+				<div class="input">
+					<p class="label">{$_user['mobile']}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="name">E-mail</div>
+				<div class="input">
+					<p class="label">{$_user['email']}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{include file="public/footer" /}

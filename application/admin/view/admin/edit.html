@@ -1,0 +1,135 @@
+{include file="public/header" /}
+
+<form class="ajax-form">
+	<section class="panel panel-default">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>基本信息</div>
+			<div class="opt-box" style="float: right">
+				<a href="" class="jump"><i class="icon-back"></i>返回</a>
+			</div>
+		</header>
+		<div class="panel-body">
+			<div class="form-group">
+				<div class="name">用户名</div>
+				<div class="input">
+					<input type="text" name="username" value="{$info['username']}" class="form-control {$info['admin_id'] ? 'disabled' : ''}" placeholder="用户名不能为空！" {$info['admin_id'] ? 'readonly' : ''} required minlength="3">
+					<div class="help">3位以上字符</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<span class="name">密码</span>
+				<div class="input">
+					<input type="password" name="password" value="" class="form-control password" placeholder="密码不能为空！" {$info['admin_id'] ? '' : 'required'}>
+				</div>
+			</div>
+			<div class="form-group">
+				<span class="name">确认密码</span>
+				<div class="input">
+					<input type="password" name="repassword" class="form-control" placeholder="请再次输入密码！" {$info['admin_id'] ? '' : 'required equalTo=".password"'}>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="name">姓名</div>
+				<div class="input">
+					<input type="text" name="realname" value="{$info['realname']}" class="form-control" placeholder="姓名不能为空！" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="name">手机号</div>
+				<div class="input">
+					<input type="text" name="mobile" value="{$info['mobile']}" class="form-control" placeholder="手机号不能为空！" mobile="true" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="name">E-mail</div>
+				<div class="input">
+					<input type="email" name="email" value="{$info['email']}" class="form-control" placeholder="E-mail不能为空！" email="true" required>
+				</div>
+			</div>
+
+			{:widget('Widget/area_select', ['城市', 1, 1, 0, 'province_id,city_id', $info['province_id'], $info['city_id']])}
+			
+			<div class="form-group">
+				<div class="name">角色</div>
+				<div class="input">
+					<select name="role_id">
+						<option value="">请选择角色</option>
+						{volist name="role_list" id="rs"}
+							<option value="{$rs['role_id']}" {$rs['role_id'] == $info['role_id'] ? 'selected' : ''}>{$rs['title']}</option>
+						{/volist}
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="name">选择可操作权限</div>
+				<div class="input">
+					<p class="label">
+						<span style="color:#0000FF;cursor:pointer;" onclick="$.checkbox(this,'div',true)">全选</span> /
+						<span style="color:#0000FF;cursor:pointer;" onclick="$.checkbox(this,'div',false)">反选</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="row">
+		{php}$menu_info = config('menu.menu');{/php}
+		{volist name="menu_info" id="row" key="b"}
+			{php} $module    = $key;{/php}
+			{php} $cur_auths = $user_auths[$module];{/php}
+			<div class="col-12">
+				<section class="panel panel-default">
+					<header class="panel-header">
+						<div class="title"><i class="icon-arrow-down-solid"></i>{$row['title']}</div>
+					</header>
+					{volist name="row.list" id="vo" key="k"}
+						<div class="panel-body">
+							<div class="form-group">
+								<div class="name">
+									<label>
+										<input type="checkbox" class="checkbox" onclick="$.checkbox(this,'#role-{$b}{$k}');">
+										{$vo['title']}
+									</label>
+								</div>
+								<div class="input" id="role-{$b}{$k}">
+									{volist name="vo['list']" id="ks" key="o"}
+										<label>
+											{php}$is_checked = in_array($ks['url'], $cur_auths);{/php}
+											<input type="checkbox" class="checkbox" name="auths[{$module}][]" onclick="$.checkbox(this,'#role-opt-{$b}-{$k}-{$o}');" {$is_checked ? 'checked' : ''} value="{$ks['url']}">
+											{$ks['title']}
+										</label>
+										{php}
+											if($ks['filter_list']){
+												echo '<span id="role-opt-' . $b . '-' . $k . '-'  . $o . '">(';
+											}
+											foreach($ks['filter_list'] as $ots){
+										{/php}
+										<label>
+											{php} $is_checked = in_array($ots['url'],$cur_auths);{/php}
+											<input type="checkbox" class="checkbox" name="auths[{$module}][]" {$is_checked ? 'checked' : ''} value="{$ots['url']}">
+											{$ots['title']}
+										</label>
+										{php}
+											}
+											if($ks['filter_list']){
+												echo ')</span>';
+											}
+										{/php}
+										<br>
+									{/volist}
+								</div>
+							</div>
+						</div>
+					{/volist}
+				</section>
+			</div>
+		{/volist}
+	</div>
+	
+	<div class="form-group-submit fixed">
+		<button type="submit" class="btn btn-sm bg-info"><i class="icon-save"></i>保存</button>
+		<button type="button" class="btn btn-sm bg-cancel jump"><i class="icon-back"></i>返回</button>
+		<div class="fixed-cover"></div>
+	</div>
+</form>
+{include file="public/footer" /}

@@ -1,0 +1,62 @@
+{include file="public/header" /}
+
+<form method="get" action="" novalidate="true">
+	<section class="panel panel-default search-from">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>查询条件</div>
+			<div class="opt-box" style="float: right">
+				<a href="{:url('add')}" class="jump"><i class="icon-plus"></i>添加</a>
+			</div>
+		</header>
+		<div class="panel-body">
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="feedbackid" value="{$feedbackid}" placeholder="反馈ID">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="create_time" value="{$create_time}" placeholder="反馈时间">
+				</div>
+			</div>
+
+			<div class="form-group-submit">
+				<button type="submit" class="btn btn-info"><i class="icon-search"></i>查询</button>
+			</div>
+		</div>
+	</section>
+</form>
+
+<table class="data-list">
+	<tbody>
+	<tr>
+		<th width="70">反馈ID</th>
+		<th>内容</th>
+		<th>联系方式</th>
+		<th>反馈时间</th>
+		<th>操作</th>
+	</tr>
+	{volist name="list" id="rs"}
+	<tr class="data-{$rs['feedback_id']}">
+		<td>{$rs['feedback_id']}</td>
+		<td>{$rs['content']}</td>
+		<td>{$rs['contact']}</td>
+		<td>{:date('Y-m-d H:i:s', $rs['create_time'])}</td>
+		<td>
+			<a class="btn btn-default win" title="查看详情" href="{:url('win_detail',array('user_type' => $user_type, 'feedback_id' => $rs['feedback_id']))}">
+				<i class="icon-password"></i>
+			</a>
+		</td>
+	</tr>
+	{/volist}
+	</tbody>
+</table>
+
+<div class="opt-page-box">
+	<!--<ul class="button-group">-->
+		<!--<li class="btn bg-default jump" url="{:url('add')}"><i class="icon-plus"></i>添加</li>-->
+	<!--</ul>-->
+	{$page}
+</div>
+
+{include file="public/footer" /}

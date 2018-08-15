@@ -1,0 +1,95 @@
+@import url("if.css");
+@import url("base.css");
+
+body{ background-color: #EAEDF1; color: #646464; overflow: hidden; }
+a{ color: #646464; }
+
+.topbar { /*margin-left: 200px; */
+	height: 50px; line-height: 50px; background-color: #0099CC; text-align: center; color: #FFF; }
+ul.topbar-left{ position: absolute; left: 0px; z-index: 3; }
+ul.topbar-left li{ float: left; border-right: 1px solid #018FBF; display: inline-block; }
+ul.topbar-right{ position: absolute; right: 0px; z-index: 3; }
+ul.topbar-right li{ float: left; border-left: 1px solid #018FBF; display: inline-block; }
+.topbar ul li:hover{ background-color: #018FBF; }
+.topbar a{ color: #FFF; padding: 0px 15px; display: block; }
+
+.drop-down:hover ul{ display: inline-block; }
+.drop-down ul{ position: absolute; left: 0; width: 100%; line-height: 40px; text-align: center; background-color: #30373F; display: none; }
+.drop-down ul li{ background-color: #30373F; display: block; width: 100%; cursor: pointer; }
+.drop-down ul li:hover{ background-color: #3F4852; }
+
+.topbar .switch-channel{ cursor:pointer; height: 50px; overflow: hidden; }
+.topbar .switch-channel i{ line-height: 50px; font-size: 25px; }
+
+.topbar .icon-arrow-down-solid, .topbar .icon-arrow-up-solid{ font-size: 12px; }
+
+.topbar-title{ position: absolute; left: 0px; right:0px; font-size: 16px; z-index: 2; }
+
+.sidebar{ position: absolute; top: 50px; left: 0px; bottom: 0px; width: 200px; color: #FFF; background-color: #30373F; overflow-y: auto; z-index: 1;}
+.side-title{ height: 50px; line-height: 50px; text-align: center; color: #FFF; font-size: 18px; }
+.side-title a{ color: #FFF; }
+.sidebar ul{ line-height: 40px; overflow: hidden; }
+.icon-menu{ position: absolute; width: 56px; top: 0px; bottom: 0px; text-align: center; color: #A5B6C7; background-color: #252A2E; }
+.icon-menu ul li{ cursor: pointer; }
+.icon-menu ul a{ color: #A5B6C7; }
+
+.icon-menu ul li:hover,.icon-menu ul li.on,.icon-menu ul li.on a{ color: #FFF; }
+.icon-menu ul li:hover span{ display: inline-block; }
+.icon-menu ul li i{ width: 100%; line-height: 50px; font-size: 30px; display: inline-block; }
+.icon-menu ul li span{ position: fixed; padding: 0px 10px; line-height: 50px; background-color: #252A2E; display: none; font-size: 14px;}
+
+.menu-list{ margin-left: 56px; }
+.menu-list li{ font-size: 14px; line-height: 50px; cursor: pointer; color: #75808A; padding-left: 10px; border-bottom: 1px solid #4F565E; }
+.menu-list ul{ display: none; }
+.menu-list ul.on{ display: block; }
+.menu-list li.sub i{ float: right; line-height: 50px; padding-right: 10px; }
+.menu-list li.sub a{ color: #75808A; }
+.menu-list ul li{ font-size: 12px; line-height: 40px; color: #CAD2DD; border: 0px; padding-left: 20px; border-left: 2px solid #30373F;}
+.menu-list ul li a{ color: #CAD2DD; display: block;}
+.menu-list ul li:hover, .menu-list ul li.on{ color: #FFF; background-color: #3f4852; border-left: 2px solid #0099CC;}
+
+@media (max-width: 768px) {
+	.sidebar{
+		left: -200px;
+	}
+	.main-content{
+		left: 0px !important;
+	}
+	.form-group-submit.fixed{
+		left: 0px !important;
+	}
+}
+
+input,select{border-radius: 3px;height: 35px !important;}
+input:hover,select:hover{border-color: #0099CC;}
+.main-content{ position: absolute; top: 50px; left: 200px; right: 0px; bottom: 0px; padding: 15px; overflow-y: auto; padding-bottom: 50px;}
+
+.topbar .navigation{ float: left; line-height: 50px; background-color: inherit; }
+.topbar .navigation li:hover{ background-color: inherit; }
+
+.navigation{ height: 40px; line-height: 40px; padding: 0px 10px; background-color: #FFF; margin-left: -15px; margin-right: -15px; margin-bottom: 15px; margin-top: -15px; color: #999999; border-bottom: 1px solid #e4e4e4; }
+.navigation ul{ float: left; }
+.navigation li{ display: inline-block; }
+.navigation li i{ font-size: 12px; }
+.navigation li i.icon-index{ font-size: 14px; }
+.navigation .button-group{ float: right; height: 40px; }
+.navigation .button-group button{ line-height: 30px; height: 30px; padding: 0px 10px; border-radius: 5px; }
+table.data-list{ overflow: hidden; }
+table.data-list th{border: 0px;background-color: #fff;border-bottom: 1px solid #dcdcdc;}
+table.data-list td{border: 0px;border-bottom: 1px solid #dcdcdc; }
+table.data-list tr:last-child td{border: 0px;}
+table.data-list a, table.data-list a.btn{ width: 26px; height: 26px; text-align: center; padding: 0px; line-height: 26px; }
+table.data-list a.btn i{ font-size: 16px; }
+
+.form-group-submit.fixed{ left: 200px; }
+.opt-page-box{ margin-top: 15px; }
+.opt-page-box .button-group{ float: left; }
+.opt-page-box .pagination{ margin: 0px; }
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+{eq name="is_wrap_name" value="1"}
+<div class="form-group">
+	<div class="name">{$show_name}</div>
+	<div class="input">
+{/eq}
+		{eq name="is_disabled" value="1"}
+			{$_widget_province_name}
+			{$_widget_city_name}
+			{$_widget_area_name}
+		{else/}
+			{eq name="is_show_province" value="1"}
+				<select name="province_id" class="ajax-province-change" uniqid="{$uniqid}" ajax-url="{:url('Area/get_area_list')}" {$is_required ? 'required' : ''}>
+					<option value="">-省份-</option>
+					{volist name="province_list" id="rs"}
+						<option value="{$rs['area_id']}" {$rs['area_id'] == $province_id ? 'selected' : ''}>{$rs['name']}</option>
+					{/volist}
+				</select>
+			{/eq}
+			
+			{eq name="is_show_city" value="1"}
+				<select name="city_id" class="ajax-city-change" uniqid="{$uniqid}" ajax-url="{:url('Area/get_area_list')}"  {$is_required ? 'required' : ''} {$city_list ? '' : 'style="display:none"'}>
+					<option value="">-城市-</option>
+					{volist name="city_list" id="rs"}
+						<option value="{$rs['area_id']}" {$rs['area_id'] == $city_id ? 'selected' : ''}>{$rs['name']}</option>
+					{/volist}
+				</select>
+			{/eq}
+			
+			{eq name="is_show_area" value="1"}
+				<select name="area_id" class="ajax-area-change" uniqid="{$uniqid}" ajax-url="{:url('Area/get_area_list')}"  {$is_required ? 'required' : ''}  {$area_list ? '' : 'style="display:none"'}>
+					<option value="">-地区-</option>
+					{volist name="area_list" id="rs"}
+						<option value="{$rs['area_id']}" {$rs['area_id'] == $area_id ? 'selected' : ''} >{$rs['name']}</option>
+					{/volist}
+				</select>
+			{/eq}
+		{/eq}
+{eq name="is_wrap_name" value="1"}
+	</div>
+</div>
+{/eq}

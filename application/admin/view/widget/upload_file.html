@@ -1,0 +1,27 @@
+{eq name="is_wrap_name" value="1"}
+<div class="form-group">
+	<div class="name">{$show_name}</div>
+	<div class="input">
+{/eq}
+		<div class="{$field_name}-upload-list-box">
+			<span class="btn btn-info win {$field_name}-upload-btn" url="{:url('File/win_upload', array('field_name' => $field_name, 'is_mulit' => $is_mulit, 'upload_type' => $upload_type, 'upload_ext' => $upload_ext))}" title="上传{$show_name}" style="{:intval($upload_list && $is_mulit == 0) ? 'display: none': ''}"><i class="icon-upload"></i>上传{$show_name}{$show_desc}</span>
+			<ul class="upload-common-list upload-list-{$field_name}">
+				{volist name="upload_list" id="rs"}
+				<li>
+					<a class="nojump {$rs['is_pic'] ? 'view_big_pic' : ''}" href="{$rs['file_url']}">
+						<img src="{$rs['icon_url']}" alt="">
+						<input type="hidden" name="{$field_name}[]" value="{$rs['file_id']}"/>
+						<span class="desc">{$rs['filename']}</span>
+					</a>
+					<span class="cancel delete-select-upload-file" is-mulit="{$is_mulit}" field="{$field_name}">X</span>
+				</li>
+				{/volist}
+			</ul>
+			{empty name="upload_list"}
+				<input type="hidden" name="{$field_name}[]" value="0">
+			{/empty}
+		</div>
+{eq name="is_wrap_name" value="1"}
+	</div>
+</div>
+{/eq}

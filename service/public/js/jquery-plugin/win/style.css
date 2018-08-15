@@ -1,0 +1,14 @@
+.winCoverBackBg{ top:0; left:0; position:absolute; width:100%; z-index:10000; filter:alpha(opacity=20); -moz-opacity:0.2; opacity:0.2; background-color:#000; }
+.winFrontContenter{ z-index:10001; background:#ffffff; width:auto; height:auto; position:fixed; *position:absolute; padding: 6px; overflow:hidden; left:0px; -webkit-border-radius:3px; -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);}
+.winFrontContenter .winTitleBar{ height:28px; line-height:28px; background-color:#FFF; color:#000; padding:0px 8px; font-size:14px; }
+.winFrontContenter .winTitleBar *{ display:block; }
+.winFrontContenter .winTitleBar a{ float:right; cursor:pointer; }
+.winFrontContenter .winTitleBar a:hover{ color:#FF0000; }
+.winFrontContenter .winTitleBar span{ float:left; }
+.winBodyContainer{ padding:10px; width:auto; *float:left; *clear:both; line-height: 20px; overflow: hidden; }
+.win-close{ width: 17px; height: 17px; margin-top: 8px; display: inline-block; color: #A2A2A2;}
+
+.winBodyContainer .confirm_btn,.winBodyContainer .cancel_btn{ padding: 0px; border: 1px solid #00BEB7; margin: 0px 3px; outline: none; line-height: 30px; padding: 0px 10px; background: #00BEB7; color: #FFF; cursor: pointer; display: inline-block; }
+.winBodyContainer .cancel_btn{ border: 1px solid #c8c8c8; background: #c8c8c8; }
+.winBodyContainer .cancel_btn:hover{ border: 1px solid #9D9D9D; }
+.winBodyContainer .confirm_btn:hover{ color: #FFF; border: 1px solid #01B5AF; }

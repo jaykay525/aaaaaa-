@@ -1,0 +1,155 @@
+<div class="" style="width: 550px;height: 300px;" is-scroll="true">
+	<ul class="tab-label">
+		<li class="on"><a href="{:url('File/win_upload', array('field_name' => $field_name, 'is_mulit' => $is_mulit, 'upload_type' => $upload_type, 'upload_ext' => $upload_ext))}">本地上传</a></li>
+		<li class=""><a href="{:url('File/win_online', array('field_name' => $field_name, 'is_mulit' => $is_mulit, 'upload_type' => $upload_type, 'upload_ext' => $upload_ext))}">在线选择</a></li>
+	</ul>
+
+	<div class="panel panel-default" style="border: 0;box-shadow: none;">
+		<div class="panel-body">
+			<ul class="win-upload-box upload-box-{$field_name}">
+				<li class="add filePicker-{$field_name}"><i class="icon-plus"></i></li>
+			</ul>
+		</div>
+	</div>
+	<div class="win-opt-box">
+		<span class="btn btn-confirm confirm-selected-file" field="{$field_name}" is-mulit="{$is_mulit}" win-id="" to="upload-list-{$field_name}"><i class="icon-success"></i>确定</span>
+		<span class="btn btn-cancel remove-win"><i class="icon-error"></i>取消</span>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+	$("<link>").attr({ 
+		rel: "stylesheet",
+		type: "text/css",
+		href: "/public/js/webuploader/webuploader.css"
+	}).appendTo("head");
+	$.getScript("/public/js/webuploader/webuploader.js", function () {
+		var	ratio = window.devicePixelRatio || 1,// 优化retina, 在retina下这个值是2
+			// 缩略图大小
+			thumbnailWidth = 100 * ratio,
+			thumbnailHeight = 100 * ratio;
+			// Web Uploader实例
+		var uploader = WebUploader.create({
+			// 自动上传。
+        	auto: true,
+			// swf文件路径
+			swf: '/public/js/webuploader/Uploader.swf',
+			// 文件接收服务端。
+			server: '/file/upload.html',
+			// 选择文件的按钮。可选。
+			// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+			pick: '.filePicker-{$field_name}',
+			 // 只允许选择图片文件。
+			accept: {
+				{eq name="upload_type" value="img"}
+					mimeTypes: 'image/*',
+				{/eq}
+				{eq name="upload_type" value="video"}
+					mimeTypes: 'video/*',
+				{/eq}
+				{eq name="upload_type" value="audio"}
+					mimeTypes: 'audio/*',
+				{/eq}
+				{neq name="upload_ext" value=""}
+					extensions: '{$upload_ext}'
+				{/neq}
+			},
+			// 验证文件总大小是否超出限制
+			// fileSizeLimit : 3242880,
+			// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+			resize: false
+		});
+
+		// 当有文件添加进来的时候
+		uploader.on( 'fileQueued', function( file ) {
+			var li_id   = file.id;
+			var li_html = '<li id="' + file.id + '" class="file-item" is-mulit="{$is_mulit}"><img><input type="hidden" name="{$field_name}[]" value="0"/><i class="icon-success"></i><span class="desc">' + file.name + '</span></li>';
+
+			// $list为容器jQuery实例
+			$('.win-upload-box li.add').before( li_html );
+
+			// 创建缩略图
+			// 如果为非图片文件，可以不用调用此方法。
+			// thumbnailWidth x thumbnailHeight 为 100 x 100
+			uploader.makeThumb( file, function( error, src ) {
+				if ( error ) {
+					// $('#' + li_id).find('img').replaceWith('<span class="desc">不能预览</span>');
+					$('#' + li_id).find('img').attr( 'src', '{:model("File")->get_path("icon-file.png")}' );
+					return;
+				}
+
+				$('#' + li_id).find('img').attr( 'src', src );
+			}, thumbnailWidth, thumbnailHeight );
+		});
+
+		// 文件上传过程中创建进度条实时显示。
+		uploader.on( 'uploadProgress', function( file, percentage ) {
+			var li = $( '#' + file.id );
+			var percent = li.find('.progress span');
+
+			// 避免重复创建
+			if ( !percent.length ) {
+				percent = $('<p class="progress"><span></span></p>').appendTo( li ).find('span');
+			}
+
+			percent.css( 'width', percentage * 100 + '%' );
+		});
+
+		// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+		uploader.on( 'uploadSuccess', function( file, resporse ) {
+			if(resporse.status == 200){
+				var is_mulit = {$is_mulit};
+				var file_id  = resporse.data.file_id;
+				var icon_url = resporse.data.icon_url;
+				var is_pic   = resporse.data.is_pic;
+				$( '#' + file.id ).attr('file-id', file_id);
+				$( '#' + file.id ).attr('is-pic', is_pic);
+				$( '#' + file.id ).attr('file-url', icon_url);
+				$( '#' + file.id ).find('input').val(file_id);
+				if(is_mulit == 0){
+					$('.upload-box-{$field_name} .file-item').removeClass('on');
+					$('.upload-box-{$field_name} .file-item').find('input[value!="' + file_id + '"]').remove();
+				}
+				$( '#' + file.id ).addClass('upload-state-done on');
+				msgbox('上传成功！');
+			}else{
+				var msg = resporse.info;
+				msgbox(msg ? msg : '上传失败！', 'error');
+				$( '#' + file.id ).remove();
+			}
+		});
+
+		// 文件上传失败，现实上传出错。
+		uploader.on( 'uploadError', function( file, reason ) {
+			console.log(file);
+			console.log(reason);
+			var li = $( '#' + file.id );
+			// var error = li.find('div.error');
+			// 避免重复创建
+			// if ( !error.length ) {
+			// 	error = $('<div class="error"></div>').appendTo( li );
+			// }
+			// error.text('上传失败');
+			msgbox('上传失败！', 'error');
+			$( '#' + file.id ).find('input').remove();
+		});
+
+		// 完成上传完了，成功或者失败，先删除进度条。
+		uploader.on( 'uploadComplete', function( file ) {
+			$( '#' + file.id ).find('.progress').remove();
+		});
+		uploader.on('error', function (type) {
+			if(type == 'Q_EXCEED_NUM_LIMIT'){
+				msgbox('上传数量超限！');
+			}
+			if(type == 'Q_EXCEED_SIZE_LIMIT'){
+				msgbox('上传文件大小超过2M限制！');
+			}
+			if(type == 'Q_TYPE_DENIED'){
+				msgbox('文件类型不对，仅限：{$upload_ext}');
+			}
+		})
+	});
+})
+</script>

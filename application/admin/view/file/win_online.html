@@ -1,0 +1,26 @@
+<div class="" style="width: 550px;height:">
+	<ul class="tab-label">
+		<li class=""><a href="{:url('File/win_upload', array('field_name' => $field_name, 'is_mulit' => $is_mulit, 'upload_type' => $upload_type, 'upload_ext' => $upload_ext))}">本地上传</a></li>
+		<li class="on"><a href="{:url('File/win_online', array('field_name' => $field_name, 'is_mulit' => $is_mulit, 'upload_type' => $upload_type, 'upload_ext' => $upload_ext))}">在线选择</a></li>
+	</ul>
+
+	<div class="panel panel-default" style="border: 0;box-shadow: none;">
+		<div class="panel-body">
+			<ul class="win-upload-box upload-box-{$field_name}">
+				{volist name="list" id="rs"}
+					<li class="file-item" is-mulit="{$is_mulit}" file-url="{$rs['file_url']}" is-pic="{$rs['is_pic']}">
+						<i class="icon-success"></i>
+						<img src="{$rs['icon_url']}" alt="">
+						<span class="desc">{$rs['filename']}</span>
+						<input type="hidden" name="{$field_name}[]" value="{$rs['file_id']}"/>
+					</li>
+				{/volist}
+			</ul>
+			<div class="upload-page">{$page}</div>
+		</div>
+	</div>
+	<div class="win-opt-box">
+		<span class="btn btn-confirm confirm-selected-file" field="{$field_name}" is-mulit="{$is_mulit}" win-id="" to="upload-list-{$field_name}"><i class="icon-success"></i>确定</span>
+		<span class="btn btn-cancel remove-win"><i class="icon-error"></i>取消</span>
+	</div>
+</div>

@@ -1,0 +1,101 @@
+{include file="public/header" /}
+
+<form class="ajax-form">
+{php}$c_num = 0;{/php}
+{volist name="list" id="rs"}
+	{php}$c_num++;{/php}
+	{neq name="rs.label" value=""}
+		<section class="panel panel-default">
+			<header class="panel-header">
+				<div class="title"><i class="icon-arrow-down-solid"></i>{$rs['label']}</div>
+				<div class="opt-box" style="float: right">
+					<a href="{$rs['opt']['url']}" target="_blank">{$rs['opt']['name']}</a>
+				</div>
+			</header>
+			<div class="panel-body">
+	{/neq}
+			<div class="form-group">
+				<div class="name">{$rs['title']}</div>
+				<div class="input">
+					{switch name="rs.val_type"}
+						{case value="text"}
+							<input type="text" name="{$rs['name']}" value="{$rs['val']}">
+						{/case}
+						{case value="textarea"}
+							<textarea name="{$rs['name']}" style="{$rs['style']}">{$rs['val']}</textarea><br>
+						{/case}
+						{case value="radio"}
+							{eq name="rs.val_content" value=""}
+								<label>
+									<input type="radio" class="radio" name="{$rs['name']}" value="1" {eq name="rs.val" value="1"}checked{/eq}>是
+								</label>
+								<label>
+									<input type="radio" class="radio" name="{$rs['name']}" value="0" {eq name="rs.val" value="0"}checked{/eq}>否
+								</label>
+							{else/}
+								{php}
+									$lidata = explode('||' , $rs['val_content']);
+								{/php}
+								{volist name="lidata" id="row"}
+									{php}$key_name = explode("=" , $row);{/php}
+									<label>
+										<input type="radio" class="radio" name="{$rs['name']}" value="{$key_name[0]}" {eq name="rs.val" value="$key_name[0]"}checked{/eq}>{$key_name[1]}
+									</label>
+								{/volist}
+							{/eq}
+						{/case}
+						{case value="select"}
+							<select name="{$rs['name']}">
+								<php>
+									$lidata = explode('||' , $rs['val_content']);
+								</php>
+								{volist name="lidata" id="row"}
+									{php}$key_name = explode("=" , $row);{/php}
+									<option value="{$key_name[0]}" {eq name="rs.val" value="$key_name[0]"}selected{/eq}>{$key_name[1]}</option>
+								{/volist}
+							</select>
+						{/case}
+						{case value="checkbox"}
+							<php>
+								$lidata = explode('||' , $rs['val_content']);
+							</php>
+							{volist name="lidata" id="row"}
+								{php}
+									$checked  = false;
+									$key_name = explode("=", $row);
+									$val_arr  = explode(",", $rs['val']);
+									if(in_array($key_name[0], $val_arr)){
+										$checked = true;
+									}
+								{/php}
+								<label><input type="checkbox" class="checkbox" name="{$rs['name']}[]" value="{$key_name[0]}" {$checked == 1 ? 'checked' : ''}>{$key_name[1]}</label>
+							{/volist}
+						{/case}
+						
+						{case value="url"}
+							<input type="text" name="{$rs['name']}" value="{$rs['val']}" ignore="ignore">
+						{/case}
+						{case value="file"}
+							{:widget('Widget/upload_file', [$rs['title'], $rs['name'], $rs['val'], '', 0, 'img', $rs['file_ext'], 0])}
+						{/case}
+						{default /}
+							<input type="text" name="{$rs['name']}" value="{$rs['val']}" >
+					{/switch}
+					<div class="help">{$rs['description']}</div>
+				</div>
+			</div>
+	{php}
+		$is_end = $list[$c_num]['label'] != '' || $c_num == count($list);
+	{/php}
+	{eq name="is_end" value="1"}
+			</div>
+		</section>
+	{/eq}
+{/volist}
+	<div class="form-group-submit fixed">
+		<button type="submit" class="btn btn-sm bg-info"><i class="icon-save"></i>保存</button>
+		<button type="button" class="btn btn-sm bg-cancel jump"><i class="icon-back"></i>返回</button>
+		<div class="fixed-cover"></div>
+	</div>
+</form>
+{include file="public/footer" /}

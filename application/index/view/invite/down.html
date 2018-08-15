@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>区块链项目评测平台</title>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <link rel="stylesheet" href="../public/css/style.css">
+</head>
+
+<body>
+    <div class="download" >
+        <button style="position: absolute;">立即下载</button>
+    </div>
+    <div id="mask" class="hide"></div>
+    <div id="weixinTip" class="weixinTip hide"></div>
+</body>
+
+<script type="text/javascript" src="__PUBLIC__js/jquery-1.12.4.min.js"></script>
+<script>
+    $(function(){
+        $(".android").hide();
+        $(".ios").hide();
+        $(".ios").hide();
+
+        var is_ios     = /(iPhone|iPad|iPod)/ig.test(navigator.userAgent);
+        console.log(is_ios);
+        var is_android = /(android)/ig.test(navigator.userAgent);
+        console.log(is_android);
+        var is_weixin  = /(micromessenger)/ig.test(navigator.userAgent);
+        console.log(is_weixin);
+
+        $('.ios').show();
+        $('.android').show();
+
+        var tip_class= is_android ? 'android_tip' : 'ios_tip';
+
+
+        $(".download button").click(function(){
+            if(is_weixin){
+                $('#mask').removeClass('hide');
+                $('#weixinTip').removeClass('hide').addClass(tip_class);
+                $('#weixinTip').height($(window).height());
+
+                //点击背景，隐藏tips
+                $("#mask,#weixinTip").click(function(){
+                    $('#mask').addClass('hide');
+                    $('#weixinTip').addClass('hide');
+                });
+                return false;
+            }
+
+            if (is_android) {
+                window.location.href='{$android}';
+            }
+            if(is_ios){
+                window.location.href='{$ios}';
+            }
+
+            return false;
+        });
+
+    });
+</script>
+</html>

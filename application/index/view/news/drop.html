@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$info.title}</title>
+    <link rel="stylesheet" href="../public/css/details.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+</head>
+<body>
+    <div class="drop">
+        <!--项目介绍-->
+        <div >
+            <div class="project-information">
+                <img src="{$info.filepath}" alt=""  width="100%">
+                <span class="title">{$info.title}</span>
+                <span class="begin">开始时间：{$info.begin_time|date="Y-m-d",###}</span>
+                <span class="end" >结束时间：{$info.end_time|date="Y-m-d",###}</span>
+            </div>
+            <!--项目简介-->
+            <div class="project-introduction" >
+                <span> {$info.description}</span>
+            </div>
+            <!--糖果入口-->
+            <div class="candy-entrance">
+                <div >
+                    <img class="candy" src="/public/index/images/news/candy.png" alt="" >
+                    <img class="hand" src="/public/index/images/news/hand.png" alt="" >
+                    <a href="{$info.url}" >{$info.url}</a>
+            </div>
+             </div>
+            <!--项目简介-->
+            <div class="project-introduction" >
+                <span>
+                    {$info.content}
+                </span>
+            </div>
+        </div>
+        <div class="link-invite"></div>
+        <div class="phone"></div>
+    </div>
+</body>
+<script type="text/javascript" src="__PUBLIC__js/jquery-1.12.4.min.js"></script>
+<script>
+
+    /***
+     * is_ios、is_android、is_weixin分别判断是ios还是Android还是wechat
+     * #btn,.link-invite点击之后跳转到App对应的页面，没有安装App跳转到邀请页面
+     */
+
+    var is_ios     = /(iPhone|iPad|iPod)/ig.test(navigator.userAgent);
+
+    var is_android = /(android)/ig.test(navigator.userAgent);
+
+    var is_weixin  = /(micromessenger)/ig.test(navigator.userAgent);
+
+    $('.link-invite').click(function (e) {
+        if (is_weixin) {
+            window.location.href='{$invite_url}'
+        }else if (!is_weixin&&is_android) {
+            //  Android打开项目详情 &28拼接的参数
+            window.location.href='ukl://candydetail?id={$info.article_id}';
+        }else if (!is_weixin&&is_ios){
+            //  IOS打开项目详情 &28拼接的参数
+            window.location.href='uklioapp://?parame=3&{$info.article_id}';
+        }
+        window.setTimeout(function(){
+            window.location.href='{$invite_url}'
+        },4000)
+    });
+</script>
+</html>

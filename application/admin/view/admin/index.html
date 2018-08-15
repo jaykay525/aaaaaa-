@@ -1,0 +1,93 @@
+{include file="public/header" /}
+
+<form method="get" action="{:url('index')}" novalidate="true">
+	<section class="panel panel-default search-from">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>查询条件</div>
+			<div class="opt-box" style="float: right">
+				<a href="{:url('add')}" class="jump"><i class="icon-plus"></i>添加</a>
+				<a href="" class="jump"><i class="icon-back"></i>返回</a>
+			</div>
+		</header>
+		<div class="panel-body">
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="admin_id" value="{$admin_id}" placeholder="管理员ID">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="username" value="{$username}" placeholder="用户名">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="realname" value="{$realname}" placeholder="姓名">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<input type="text" name="mobile" value="{$mobile}" placeholder="手机号">
+				</div>
+			</div>
+			<div class="col-2 col-xd">
+				<div class="form-group">
+					<select name="status">
+						<option value="">状态</option>
+						<option value="1" {eq name="status" value="1"}selected{/eq}>启用</option>
+						<option value="0" {eq name="status" value="0"}selected{/eq}>禁用</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group-submit">
+				<button type="submit" class="btn btn-info"><i class="icon-search"></i>查询</button>
+			</div>
+		</div>
+	</section>
+</form>
+
+<table class="data-list">
+	<tbody>
+		<tr>
+			<th width="70">管理员ID</th>
+			<th>城市</th>
+			<th>用户名</th>
+			<th>姓名</th>
+			<th>手机号</th>
+			<th>E-mail</th>
+			<th>角色</th>
+			<th>状态</th>
+			<th>操作</th>
+		</tr>
+		{volist name="list" id="rs"}
+			<tr class="data-{$rs['admin_id']}">
+				<td>{$rs['admin_id']}</td>
+				<td>{$rs['city_name']}</td>
+				<td>{$rs['username']}</td>
+				<td>{$rs['realname']}</td>
+				<td>{$rs['mobile']}</td>
+				<td>{$rs['email']}</td>
+				<td>{$rs['role_name']}</td>
+				<td>
+					<span class="label label-{$rs.status_color_class}">{$rs.status_desc}</span>
+				</td>
+				<td>
+					{neq name="rs.status" value="99"}
+					<a class="btn btn-default" title="修改" href="{:url('edit', array('admin_id' => $rs['admin_id']))}">
+						<i class="icon-edit"></i>
+					</a>
+					{/neq}
+				</td>
+			</tr>
+		{/volist}
+	</tbody>
+</table>
+
+<div class="opt-page-box">
+	<ul class="button-group">
+		<li class="btn bg-default jump" url="{:url('add')}"><i class="icon-plus"></i>添加</li>
+	</ul>
+	{$page}
+</div>
+
+{include file="public/footer" /}

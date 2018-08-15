@@ -1,0 +1,35 @@
+{include file="public/header" /}
+
+<form class="ajax-form">
+	<section class="panel panel-default">
+		<header class="panel-header">
+			<div class="title"><i class="icon-arrow-down-solid"></i>{$_cur_title}</div>
+			<div class="opt-box" style="float: right">
+				<a href="" class="jump"><i class="icon-back"></i>返回</a>
+			</div>
+		</header>
+		<div class="panel-body">
+			<div class="form-group">
+				<div class="name">标题</div>
+				<div class="input">
+					<input type="text" name="title" value="{$info['title']|default=$_cur_title}" class="form-control" placeholder="请填写文章标题！" required>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="name">内容</div>
+				<div class="input">
+					<textarea name="content" class="ueditor" id="ueditor_content" style="width: 100%;height:350px;">{$info['content']}</textarea>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="form-group-submit fixed">
+		<input type="hidden" name="module" value="{$module}">
+		<button type="submit" class="btn btn-sm bg-info"><i class="icon-save"></i>保存</button>
+		<button type="button" class="btn btn-sm bg-cancel jump"><i class="icon-back"></i>返回</button>
+		<div class="fixed-cover"></div>
+	</div>
+</form>
+{include file="public/footer" /}

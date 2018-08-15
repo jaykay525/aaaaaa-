@@ -1,0 +1,22 @@
+@import url("if.css");
+@import url("base.css");
+
+body { font-family:"Microsoft Yahei"; font-size:12px; margin:0; background: #F5D1AD url(../images/login-bg.jpg) 50% 0 no-repeat; background-size: cover}
+ul { padding:0; margin:0; }
+ul li { list-style-type:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:none; color:#f00; }
+input[type="text"]:focus, input[type="password"]:focus { outline:none; }
+h1 { margin-top: 100px; margin-bottom: 30px; text-align: center; color: #fff; font-size: 35px; font-weight: bold; text-shadow: 0px 1px 1px #555; }
+.login { width:370px; border-bottom:none; position:relative; border: 0; padding: 5px 0; background: #fff; margin: 0 auto; -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3); box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .3); }
+
+.header-switch { font-size: 20px; line-height: 50px; text-align: center; border-bottom: 1px solid #e2e2e2; }
+.header-switch .on span{ padding: 0 10px; margin-bottom: -1px; border-bottom: 2px solid #848484; display: inline-block; }
+.form-box{ padding: 30px; }
+.table{ font-size: 14px; width: 100%; line-height: 30px; display: table; margin-bottom: 15px; }
+.table li{ display: table-cell; }
+.table li.name{width: 60px;}
+.table input{ font-size: 14px; width: 100%; height: 40px; padding: 0px 10px; border: 1px solid #e2e2e2; box-sizing: border-box; }
+.table input:hover{ border: 2px solid #2795dc; padding: 0px 9px;}
+.submit-box{ text-align: center; }
+.submit-box button{ width: 120px; height: 40px; border-radius: 4px; background: #2795dc; border: none; cursor: pointer; border-bottom: 3px solid #0078b3; color: #fff; font-size: 16px; padding: 0 10px; text-align: center; outline: none; display: inline-block; }
